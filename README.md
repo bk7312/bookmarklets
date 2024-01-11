@@ -2,19 +2,35 @@
 
 Here's a collection of bookmarklets I've used over the years
 
+## How to install and use bookmarklets
+
+To install a bookmarklet, create a new bookmark and paste the code into the URL bar. See examples below, images taken from [freeCodeCamp](https://www.freecodecamp.org/news/what-are-bookmarklets/).
+
+#### Example using Firefox:
+
+![firefox-1](https://github.com/bk7312/bookmarklets/assets/14029543/db38cfc8-145d-4fb0-8395-2a06cbc76723)
+
+#### Example using Chromium:
+
+![chromium](https://github.com/bk7312/bookmarklets/assets/14029543/f53a55f2-ecc0-4a68-8231-e85bad099072)
+
+
 ## Video-related bookmarklets
+
 A collection of video-related bookmarklets, works as long as the website uses video tags. Applies to the first video on the website, might not work if the video tags are inside an iframe. 
 
 Note: It should be possible to repurpose these bookmarklets to work with audio content by changing the targeted HTML tag from 'video' to 'audio'. 
 
 #### Video Controller
+
 Creates a small video playback controller fixed to the top right side of the screen, able to change playback speed, restart the video, rewind or fast forward in 10s increments, play/pause, and mute/unmute the video.
+
 ```
 javascript: (() => {
-  if (!document.getElementsByTagName('video')[0]) {
+  if (!document.querySelector('video')) {
     return alert('No video tags found');
   }
-  let vidControl = document.getElementById('vidControl-div');
+  let vidControl = document.querySelector('#vidControl-div');
   if (vidControl) {
     return vidControl.remove();
   }
@@ -28,26 +44,46 @@ javascript: (() => {
   div.style.gap = '0.2em';
   div.style.padding = '0.1em';
   div.innerHTML = `
-    <button onclick="document.getElementsByTagName('video')[0].playbackRate -= 0.2;">-</button>
-    <button onclick="document.getElementsByTagName('video')[0].playbackRate = 1;">1x</button>
-    <button onclick="document.getElementsByTagName('video')[0].playbackRate = 2;">2x</button>
-    <button onclick="document.getElementsByTagName('video')[0].playbackRate = 3;">3x</button>
-    <button onclick="document.getElementsByTagName('video')[0].playbackRate += 0.2;">+</button>
-    <button onclick="document.getElementsByTagName('video')[0].currentTime = 0;">Restart</button>
-    <button onclick="document.getElementsByTagName('video')[0].currentTime -= 10;">-10s</button>
-    <button onclick="const vid = document.getElementsByTagName('video')[0]; vid.paused ? vid.play() : vid.pause();">Play/Pause</button>
-    <button onclick="document.getElementsByTagName('video')[0].currentTime += 10;">+10s</button>
-    <button onclick="const vid = document.getElementsByTagName('video')[0]; vid.muted = !vid.muted;">Mute/Unmute</button>
+    <button onclick="document.querySelector('video').playbackRate -= 0.2;">-</button>
+    <button onclick="document.querySelector('video').playbackRate = 1;">1x</button>
+    <button onclick="document.querySelector('video').playbackRate = 2;">2x</button>
+    <button onclick="document.querySelector('video').playbackRate = 3;">3x</button>
+    <button onclick="document.querySelector('video').playbackRate += 0.2;">+</button>
+    <button onclick="document.querySelector('video').currentTime = 0;">Restart</button>
+    <button onclick="document.querySelector('video').currentTime -= 10;">-10s</button>
+    <button onclick="const vid = document.querySelector('video'); vid.paused ? vid.play() : vid.pause(); document.querySelector('#vc-p').textContent = vid.paused ? 'Play' : 'Pause'" id="vc-p">${document.querySelector('video').paused ? 'Play' : 'Pause'}</button>
+    <button onclick="document.querySelector('video').currentTime += 10;">+10s</button>
+    <button onclick="const vid = document.querySelector('video'); vid.muted = !vid.muted; document.querySelector('#vc-m').textContent = vid.muted ? 'Unmute' : 'Mute'" id="vc-m">${document.querySelector('video').loop ? 'Unmute' : 'Mute'}</button>
+    <button onclick="const vid = document.querySelector('video'); vid.loop = !vid.loop; document.querySelector('#vc-l').textContent = vid.loop ? 'Loop ON' : 'Loop OFF'" id="vc-l">${document.querySelector('video').loop ? 'Loop ON' : 'Loop OFF'}</button>
   `;
   document.body.appendChild(div);
 })()
 ```
 
-#### Change video playback speed
-Changes the first video's playback speed, should work with youtube/vimeo and etc, also shows the current playback speed. 
+#### Toggles default HTML5 video controls
+
+Toggles the default HTML5 video controls and remove all controlsList attributes.
+
 ```
 javascript: (() => {
-  const vid = document.getElementsByTagName('video')[0];
+  const vid = document.querySelector('video');
+  if (!vid) {
+    return alert('No video tags found');
+  }
+  vid.controls = !vid.controls;
+  console.log("ControlsList before overwrite:", vid.controlsList);
+  vid.controlsList = '';
+  console.log("ControlsList after overwrite:", vid.controlsList);
+})()
+```
+
+#### Change video playback speed
+
+Changes the first video's playback speed, should work with youtube/vimeo and etc, also shows the current playback speed. 
+
+```
+javascript: (() => {
+  const vid = document.querySelector('video');
   if (!vid) {
     return alert('No video tags found');
   }
@@ -57,7 +93,9 @@ javascript: (() => {
 ```
 
 #### Change all videos playback speed
+
 Useful if there are multiple videos in a single page, changes the playback speed for all videos.
+
 ```
 javascript: (() => {
   const vid = document.querySelectorAll('video');
@@ -70,10 +108,12 @@ javascript: (() => {
 ```
 
 #### Play/pause video
+
 Able to play/pause the first video, useful if video controls are hidden but recommend to use the video controller bookmarklet instead.
+
 ```
 javascript: (() => {
-  const vid = document.getElementsByTagName('video')[0];
+  const vid = document.querySelector('video');
   if (!vid) {
     return alert('No video tags found');
   }
@@ -82,24 +122,29 @@ javascript: (() => {
 ```
 
 ## Create a simple notepad on the browser
+
 Using html contenteditable to create an empty notepad to jot things down. To save your data, press Ctrl + S or save like a regular webpage, not the ideal but it works. 
 
 Alternatively, you could use something like https://browserpad.org/ which saves your data to localStorage instead.
 
 #### Plain text only
+
 ```
 data:text/html, <html contenteditable='plaintext-only'>
 ```
 
 #### Able to accept html formatting (when copy/paste from other websites)
+
 ```
 data:text/html, <html contenteditable>
 ```
 
 ## Color sampler bookmarklet 
+
 Uses the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper), unfortunately it is not supported in Firefox and Safari at the time of writing (Dec 2023). 
 
 Also converts the HEX code to RGB and HSL values, code for converting RGB to HSL referenced from https://www.30secondsofcode.org/js/s/rgb-to-hsl/
+
 ```
 javascript: (() => {
   const x = new EyeDropper();
@@ -134,7 +179,9 @@ javascript: (() => {
 ```
 
 ## Slightly improve website readability
+
 Simple bookmarklet to center the webpage, limit the width, and change the line height. Usually only works on simple websites, might break certain websites. 
+
 ```
 javascript: (() => {
   b = document.body.style;
@@ -145,7 +192,9 @@ javascript: (() => {
 ```
 
 ## Check website cookie info
+
 Reads and displays your cookie info
+
 ```
 javascript: (() => alert(document.cookie))();
 ```
@@ -159,6 +208,7 @@ As the name implies, it's a bookmarklet that kills sticky content.
 https://github.com/t-mart/kill-sticky
 
 Here's a modified version I use that doesn't remove position fixed/sticky but makes them static instead.
+
 ```
 javascript: (() => {
   document.querySelectorAll('body *').forEach(node => {
