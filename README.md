@@ -1,10 +1,14 @@
 # Collection of bookmarklets
 
-Here's a collection of bookmarklets I've used over the years
+Here are some of the bookmarklets I've created or collected over the years for my personal use.
+
+What are [bookmarklets](https://en.wikipedia.org/wiki/Bookmarklet)? They are basically bookmarks that execute javascript code when clicked instead of opening a website. Bookmarklets give you the power of javascript to do whatever you want (within the limits of your browser), so use it with care and only use bookmarklets you trust!
 
 ## How to install and use bookmarklets
 
 To install a bookmarklet, create a new bookmark and paste the code into the URL bar. See examples below, images taken from [freeCodeCamp](https://www.freecodecamp.org/news/what-are-bookmarklets/).
+
+**Only install bookmarklets from sources you trust and whenever possible, review the code before running it!**
 
 #### Example using Firefox:
 
@@ -17,7 +21,7 @@ To install a bookmarklet, create a new bookmark and paste the code into the URL 
 
 ## Video-related bookmarklets
 
-A collection of video-related bookmarklets, works as long as the website uses video tags. Applies to the first video on the website, might not work if the video tags are inside an iframe. 
+A collection of video-related bookmarklets, works as long as the website uses video tags. Applies to the first video on the website, won't work for videos inside an iframe. 
 
 Note: It should be possible to repurpose these bookmarklets to work with audio content by changing the targeted HTML tag from 'video' to 'audio'. 
 
@@ -123,6 +127,22 @@ javascript: (() => {
 })()
 ```
 
+## Check for iframes and show their source URL
+
+Handy bookmarklet to check for iframes on a website and show their source URL.
+
+```
+javascript: (() => {
+  const iframes = document.querySelectorAll('iframe');
+  if (iframes.length === 0) {
+    return alert('No iframes found');
+  }
+  const src = [];
+  iframes.forEach(i => src.push(i.src));
+  alert(`${iframes.length} iframes found, src: ${src}`);
+})()
+```
+
 ## Create a simple notepad on the browser
 
 Using html contenteditable to create an empty notepad to jot things down. To save your data, press Ctrl + S or save like a regular webpage, not the ideal but it works. 
@@ -195,7 +215,7 @@ javascript: (() => {
 
 ## Check website cookie info
 
-Reads and displays your cookie info
+Reads and displays your cookie info.
 
 ```
 javascript: (() => alert(document.cookie))();
