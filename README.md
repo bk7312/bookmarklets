@@ -18,16 +18,19 @@ To install a bookmarklet, create a new bookmark and paste the code into the URL 
 
 ![chromium](https://github.com/bk7312/bookmarklets/assets/14029543/f53a55f2-ecc0-4a68-8231-e85bad099072)
 
-
 ## Video-related bookmarklets
 
-A collection of video-related bookmarklets, works as long as the website uses video tags. Applies to the first video on the website, won't work for videos inside an iframe. 
+A collection of video-related bookmarklets, works as long as the website uses video tags. Applies to the first video on the website, won't work for videos inside an iframe.
 
-Note: It should be possible to repurpose these bookmarklets to work with audio content by changing the targeted HTML tag from 'video' to 'audio'. 
+If you want to apply to a video inside an iframe, use the iframe bookmarklet below to open the video iframe in a new tab, then try the video bookmarklet.
+
+Note: It should be possible to repurpose these bookmarklets to work with audio content by changing the targeted HTML tag from 'video' to 'audio'.
 
 #### Video Controller
 
-Creates a small video playback controller fixed to the top right side of the screen, able to change playback speed, restart the video, rewind or fast forward in 10s increments, play/pause, and mute/unmute the video.
+Creates a small video playback controller fixed to the top right side of the screen, click the bookmarklet again to remove. Note that the controller buttons will be affected by the website's existing CSS.
+
+Able to change playback speed, restart the video, rewind or fast forward in 10s increments, play/pause, and mute/unmute the video.
 
 ```
 javascript: (() => {
@@ -40,7 +43,7 @@ javascript: (() => {
   }
   const div = document.createElement("div");
   div.id = 'vidControl-div';
-  div.style.zIndex = 9999;
+  div.style.zIndex = '9999';
   div.style.position = 'fixed';
   div.style.top = '0%';
   div.style.right = '0%';
@@ -85,7 +88,7 @@ javascript: (() => {
 
 #### Change video playback speed
 
-Changes the first video's playback speed, should work with youtube/vimeo and etc, also shows the current playback speed. 
+Changes the first video's playback speed, should work with youtube/vimeo and etc, also shows the current playback speed.
 
 ```
 javascript: (() => {
@@ -129,7 +132,7 @@ javascript: (() => {
 
 ## Check for iframes and show their source URL
 
-Handy bookmarklet to check for iframes on a website and show their source URL.
+Handy bookmarklet to check for iframes on a website. Creates a set of buttons showing the iframe's source URL (opens in new tab when clicked) fixed to the top right side of the screen, click the bookmarklet again to remove the buttons. Note that the buttons will be affected by the website's existing CSS.
 
 ```
 javascript: (() => {
@@ -157,16 +160,22 @@ javascript: (() => {
   div.style.overflow = 'auto';
   let buttons = '';
   iframes.forEach(i => {
-    buttons += i.src === '' ? 
+    buttons += i.src === '' ?
       `<button style="pointer-events: none;">This iframe has no source</button>`
-      : `<button onclick="window.open('${i.src}', '_blank');" style="cursor: pointer; width: 100%">${i.src}</button>`;
+      : `<button onclick="window.open('${i.src}', '_blank');" style="cursor: pointer; width: 100%; overflow-wrap: anywhere;">${i.src}</button>`;
   });
   div.innerHTML = `
     <div style="display: flex;">
-      <button id="vc-s" style="pointer-events: none; flex-grow: 1;">${iframes.length} iframe(s) found, source(s) below</button>
-      <button onclick="document.querySelectorAll('iframe').forEach(i => i.remove())" style="cursor: pointer; margin-left: auto;">Remove all</button>
+      <button id="vc-s" style="pointer-events: none; flex-grow: 1;">\
+        ${iframes.length} iframe(s) found, source(s) below
+      </button>
+      <button onclick="document.querySelectorAll('iframe').forEach(i => i.remove())" style="cursor: pointer; margin-left: auto;">
+        Remove all
+      </button>
     </div>
-    <button id="vc-s" style="pointer-events: none; background: lightgray; border: none;">Click the url(s) to open in new tab</button>
+    <button id="vc-s" style="pointer-events: none; background: lightgray; border: none;">
+      Click the url(s) to open in new tab
+    </button>
     ${buttons}
   `;
   document.body.appendChild(div);
@@ -175,7 +184,7 @@ javascript: (() => {
 
 ## Create a simple notepad on the browser
 
-Using html contenteditable to create an empty notepad to jot things down. To save your data, press Ctrl + S or save like a regular webpage, not the ideal but it works. 
+Using html contenteditable to create an empty notepad to jot things down. To save your data, press Ctrl + S or save like a regular webpage, not the ideal but it works.
 
 Alternatively, you could use something like https://browserpad.org/ which saves your data to localStorage instead.
 
@@ -191,9 +200,9 @@ data:text/html, <html contenteditable='plaintext-only'>
 data:text/html, <html contenteditable>
 ```
 
-## Color sampler bookmarklet 
+## Color sampler bookmarklet
 
-Uses the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper), unfortunately it is not supported in Firefox and Safari at the time of writing (Dec 2023). 
+Uses the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper), unfortunately it is not supported in Firefox and Safari at the time of writing (Dec 2023).
 
 Also converts the HEX code to RGB and HSL values, code for converting RGB to HSL referenced from https://www.30secondsofcode.org/js/s/rgb-to-hsl/
 
@@ -232,7 +241,7 @@ javascript: (() => {
 
 ## Slightly improve website readability
 
-Simple bookmarklet to center the webpage, limit the width, and change the line height. Usually only works on simple websites, might break certain websites. 
+Simple bookmarklet to center the webpage, limit the width, and change the line height. Usually only works on simple websites, might break certain websites.
 
 ```
 javascript: (() => {
@@ -243,12 +252,42 @@ javascript: (() => {
 })()
 ```
 
-## Check website cookie data
+## Check website data
 
 Reads and displays your cookie data.
 
 ```
-javascript: (() => alert(document.cookie))();
+javascript: (() => alert(document.cookie || 'No cookies found'))();
+```
+
+Reads and displays your localStorage data.
+
+```
+javascript: (() => {
+  if (localStorage.length === 0) {
+    return alert('No data in localStorage found');
+  }
+  let str = '';
+  for (let [k, v] of Object.entries(localStorage)) {
+    str += `key:${k}, val:${v}, `;
+  }
+  alert(str);
+})();
+```
+
+Reads and displays your sessionStorage data.
+
+```
+javascript: (() => {
+  if (sessionStorage.length === 0) {
+    return alert('No data in sessionStorage found');
+  }
+  let str = '';
+  for (let [k, v] of Object.entries(sessionStorage)) {
+    str += `key:${k}, val:${v}, `;
+  }
+  alert(str);
+})();
 ```
 
 ## Bookmarklet by others that I found useful
@@ -286,7 +325,6 @@ javascript: (() => {
 Cool bookmarklet that lets you 'destroy' websites.
 
 https://kickassapp.com/
-
 
 ## Some resources on making bookmarklets
 
