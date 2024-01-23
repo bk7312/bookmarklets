@@ -32,7 +32,7 @@ Creates a small video playback controller fixed to the top right side of the scr
 
 Able to change playback speed, restart the video, rewind or fast forward in 10s increments, play/pause, and mute/unmute the video.
 
-Note: Due to the use if innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP).
+Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
 ```
 javascript: (() => {
@@ -146,7 +146,7 @@ Creates a small audio playback controller fixed to the top right side of the scr
 
 Able to change playback speed, restart the audio, rewind or fast forward in 10s increments, play/pause, and mute/unmute the audio.
 
-Note: Due to the use if innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP).
+Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
 ```
 javascript: (() => {
@@ -248,9 +248,13 @@ javascript: (() => {
 
 ## Check for iframes and show their source URL
 
-Handy bookmarklet to check for iframes on a website. Creates a set of buttons showing the iframe's source URL (opens in new tab when clicked) fixed to the top right side of the screen, click the bookmarklet again to remove the buttons. Note that the buttons will be affected by the website's existing CSS.
+Handy bookmarklet to check for iframes on a website.
 
-Note: Due to the use if innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP).
+#### Show iframes in separate panel
+
+Creates a set of buttons showing the iframe's source URL (opens in new tab when clicked) fixed to the top right side of the screen, click the bookmarklet again to remove the buttons. Note that the buttons will be affected by the website's existing CSS.
+
+Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
 ```
 javascript: (() => {
@@ -300,6 +304,22 @@ javascript: (() => {
 })()
 ```
 
+#### Show iframes in an alert dialog
+
+Less versatile but works if the above bookmarklet doesn't.
+
+```
+javascript: (() => {
+  const iframes = document.querySelectorAll('iframe');
+  if (iframes.length === 0) {
+    return alert('No iframes found');
+  }
+  let src = '';
+  iframes.forEach((i, idx) => src += `${idx + 1}: ${i.src}, `);
+  alert(`${iframes.length} iframes found, ${src}`);
+})()
+```
+
 ## Create a simple notepad on the browser
 
 Using html contenteditable to create an empty notepad to jot things down. To save your data, press Ctrl + S or save like a regular webpage, not the ideal but it works.
@@ -318,7 +338,11 @@ data:text/html, <html contenteditable='plaintext-only'>
 data:text/html, <html contenteditable>
 ```
 
-## Color sampler bookmarklet
+## Color sampler bookmarklets
+
+Some bookmarklets that help with color sampling.
+
+#### Using the EyeDropper API
 
 Uses the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper), unfortunately it is not supported in Firefox and Safari at the time of writing (Dec 2023).
 
@@ -357,6 +381,31 @@ javascript: (() => {
 })()
 ```
 
+#### New page with color input element
+
+The bookmarklet below is an alternative if the EyeDropper API is not supported, it opens a webpage with a color input element. Note that this replaces the current page you are on, best used on a new tab, click on the input element followed by the eyedropper icon.
+
+```
+data:text/html;charset=utf-8,<input type='color'/>
+```
+
+#### New popup window with color input element
+
+Or alternatively, the bookmarklet below opens a color input element on a new popup window. Referenced from https://css-tricks.com/web-development-bookmarklets/#comment-1795325, lightly modified for readability and to set the popup on the bottom right corner.
+
+```
+javascript:(() => {
+  const windowFeatures = `
+    popup,
+    width=100,
+    height=100,
+    left=${window.screen.availWidth},
+    top=${window.screen.availHeight},
+  `;
+  window.open('', '', windowFeatures).document.body.innerHTML = '<input type="color">';
+})();
+```
+
 ## Slightly improve website readability
 
 Simple bookmarklet to center the webpage, limit the width, and change the line height. Usually only works on simple websites, might break certain websites.
@@ -367,6 +416,16 @@ javascript: (() => {
   b.margin = "1em auto";
   b.maxWidth = "80ch";
   b.lineHeight = "1.5";
+})()
+```
+
+## Toggle designMode
+
+Toggles [designMode](https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode) to make website editable.
+
+```
+javascript: (() => {
+  document.designMode = document.designMode === 'on' ? 'off' : 'on';
 })()
 ```
 
@@ -443,6 +502,12 @@ javascript: (() => {
 Cool bookmarklet that lets you 'destroy' websites.
 
 https://kickassapp.com/
+
+#### Web development bookmarklets from CSS-tricks
+
+Some useful bookmarklets for web development, more available in the comments section.
+
+https://css-tricks.com/web-development-bookmarklets/
 
 ## Some resources on making bookmarklets
 
