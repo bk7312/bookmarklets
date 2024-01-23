@@ -32,6 +32,8 @@ Creates a small video playback controller fixed to the top right side of the scr
 
 Able to change playback speed, restart the video, rewind or fast forward in 10s increments, play/pause, and mute/unmute the video.
 
+Note: Due to the use if innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP).
+
 ```
 javascript: (() => {
   const vidControl = document.querySelector('#vidControl-div');
@@ -130,9 +132,125 @@ javascript: (() => {
 })()
 ```
 
+## Audio-related bookmarklets
+
+A collection of audio-related bookmarklets, works as long as the website uses audio tags. Applies to the first audio on the website, won't work for audios inside an iframe.
+
+If you want to apply to a audio inside an iframe, use the iframe bookmarklet below to open the audio iframe in a new tab, then try the audio bookmarklet.
+
+Note: Repurposed from the video bookmarklets.
+
+#### Audio Controller
+
+Creates a small audio playback controller fixed to the top right side of the screen, click the bookmarklet again to remove. Note that the controller buttons will be affected by the website's existing CSS.
+
+Able to change playback speed, restart the audio, rewind or fast forward in 10s increments, play/pause, and mute/unmute the audio.
+
+Note: Due to the use if innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP).
+
+```
+javascript: (() => {
+  const audControl = document.querySelector('#audControl-div');
+  if (audControl) {
+    return audControl.remove();
+  }
+  if (!document.querySelector('audio')) {
+    return alert('No audio tags found');
+  }
+  const div = document.createElement("div");
+  div.id = 'audControl-div';
+  div.style.zIndex = '9999';
+  div.style.position = 'fixed';
+  div.style.top = '0%';
+  div.style.right = '0%';
+  div.style.display = 'flex';
+  div.style.gap = '0.2em';
+  div.style.padding = '0.1em';
+  div.style.userSelect = 'none';
+  div.innerHTML = `
+    <button id="ac-s" style="pointer-events: none;">${document.querySelector('audio').playbackRate.toFixed(1)}x</button>
+    <button onclick="const aud = document.querySelector('audio'); aud.playbackRate -= 0.2; document.querySelector('#ac-s').textContent = aud.playbackRate.toFixed(1) + 'x'" style="cursor: pointer;">-</button>
+    <button onclick="const aud = document.querySelector('audio'); aud.playbackRate = 1; document.querySelector('#ac-s').textContent = aud.playbackRate.toFixed(1) + 'x'" style="cursor: pointer;">1x</button>
+    <button onclick="const aud = document.querySelector('audio'); aud.playbackRate = 2; document.querySelector('#ac-s').textContent = aud.playbackRate.toFixed(1) + 'x'" style="cursor: pointer;">2x</button>
+    <button onclick="const aud = document.querySelector('audio'); aud.playbackRate = 3; document.querySelector('#ac-s').textContent = aud.playbackRate.toFixed(1) + 'x'" style="cursor: pointer;">3x</button>
+    <button onclick="const aud = document.querySelector('audio'); aud.playbackRate += 0.2; document.querySelector('#ac-s').textContent = aud.playbackRate.toFixed(1) + 'x'" style="cursor: pointer;">+</button>
+    <button onclick="document.querySelector('audio').currentTime = 0;" style="cursor: pointer;">Restart</button>
+    <button onclick="document.querySelector('audio').currentTime -= 10;" style="cursor: pointer;">-10s</button>
+    <button onclick="const aud = document.querySelector('audio'); aud.paused ? aud.play() : aud.pause(); document.querySelector('#ac-p').textContent = aud.paused ? 'Play' : 'Pause'" id="ac-p" style="cursor: pointer;">${document.querySelector('audio').paused ? 'Play' : 'Pause'}</button>
+    <button onclick="document.querySelector('audio').currentTime += 10;" style="cursor: pointer;">+10s</button>
+    <button onclick="const aud = document.querySelector('audio'); aud.muted = !aud.muted; document.querySelector('#ac-m').textContent = aud.muted ? 'Unmute' : 'Mute'" id="ac-m" style="cursor: pointer;">${document.querySelector('audio').loop ? 'Unmute' : 'Mute'}</button>
+    <button onclick="const aud = document.querySelector('audio'); aud.loop = !aud.loop; document.querySelector('#ac-l').textContent = aud.loop ? 'Loop ON' : 'Loop OFF'" id="ac-l" style="cursor: pointer;">${document.querySelector('audio').loop ? 'Loop ON' : 'Loop OFF'}</button>
+  `;
+  document.body.appendChild(div);
+})()
+```
+
+#### Toggles default HTML5 audio controls
+
+Toggles the default HTML5 audio controls and remove all controlsList attributes.
+
+```
+javascript: (() => {
+  const aud = document.querySelector('audio');
+  if (!aud) {
+    return alert('No audio tags found');
+  }
+  aud.controls = !aud.controls;
+  console.log("ControlsList before overwrite:", aud.controlsList);
+  aud.controlsList = '';
+  console.log("ControlsList after overwrite:", aud.controlsList);
+})()
+```
+
+#### Change audio playback speed
+
+Changes the first audio's playback speed, also shows the current playback speed.
+
+```
+javascript: (() => {
+  const aud = document.querySelector('audio');
+  if (!aud) {
+    return alert('No audio tags found');
+  }
+  const x = prompt(`Playback Speed? (Current: ${aud.playbackRate})`);
+  aud.playbackRate = parseFloat(x);
+})()
+```
+
+#### Change all audios playback speed
+
+Useful if there are multiple audios in a single page, changes the playback speed for all audios.
+
+```
+javascript: (() => {
+  const aud = document.querySelectorAll('audio');
+  if (aud.length === 0) {
+    return alert('No audio tags found');
+  }
+  const x = prompt(`Playback Speed?`);
+  aud.forEach(a => a.playbackRate = parseFloat(x));
+})()
+```
+
+#### Play/pause audio
+
+Able to play/pause the first audio, useful if audio controls are hidden but recommend to use the audio controller bookmarklet instead.
+
+```
+javascript: (() => {
+  const aud = document.querySelector('audio');
+  if (!aud) {
+    return alert('No audio tags found');
+  }
+  aud.paused ? aud.play() : aud.pause();
+})()
+```
+
 ## Check for iframes and show their source URL
 
 Handy bookmarklet to check for iframes on a website. Creates a set of buttons showing the iframe's source URL (opens in new tab when clicked) fixed to the top right side of the screen, click the bookmarklet again to remove the buttons. Note that the buttons will be affected by the website's existing CSS.
+
+Note: Due to the use if innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP).
 
 ```
 javascript: (() => {
