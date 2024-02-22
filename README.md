@@ -435,6 +435,8 @@ Deletes an element on click (One time only)
 
 ```
 javascript: (() => {
+  let mouseX = 0;
+  let mouseY = 0;
   const getEl = (e) => {
     const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
     const idx = Array.from(tags).indexOf(e.target);
@@ -442,6 +444,8 @@ javascript: (() => {
   };
   const handleMouseover = (e) => {
     const el = getEl(e);
+    mouseX = e.clientX;
+    mouseY = e.clientY;
     if (el) {
       el.style.outline = 'dashed';
     }
@@ -469,6 +473,7 @@ javascript: (() => {
   const handleEsc = (e) => {
     if (e.key === 'Escape') {
       e.preventDefault();
+      document.elementFromPoint(mouseX, mouseY).style.outline = '';
       unmount();
     }
   };
@@ -483,6 +488,8 @@ Deletes an element on click (Active until page reload or Esc key pressed)
 
 ```
 javascript: (() => {
+  let mouseX = 0;
+  let mouseY = 0;
   const getEl = (e) => {
     const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
     const idx = Array.from(tags).indexOf(e.target);
@@ -490,6 +497,8 @@ javascript: (() => {
   };
   const handleMouseover = (e) => {
     const el = getEl(e);
+    mouseX = e.clientX;
+    mouseY = e.clientY;
     if (el) {
       el.style.outline = 'dashed';
     }
@@ -516,6 +525,7 @@ javascript: (() => {
   const handleEsc = (e) => {
     if (e.key === 'Escape') {
       e.preventDefault();
+      document.elementFromPoint(mouseX, mouseY).style.outline = '';
       unmount();
     }
   };
