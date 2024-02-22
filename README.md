@@ -429,6 +429,103 @@ javascript: (() => {
 })()
 ```
 
+## Delete element on click
+
+Deletes an element on click (One time only)
+
+```
+javascript: (() => {
+  const getEl = (e) => {
+    const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
+    const idx = Array.from(tags).indexOf(e.target);
+    return idx === -1 ? null : tags[idx];
+  };
+  const handleMouseover = (e) => {
+    const el = getEl(e);
+    if (el) {
+      el.style.outline = 'dashed';
+    }
+  };
+  const handleMouseout = (e) => {
+    const el = getEl(e);
+    if (el) {
+      el.style.outline = '';
+    }
+  };
+  const unmount = () => {
+    document.body.removeEventListener('click', handleClick);
+    document.body.removeEventListener('mouseover', handleMouseover);
+    document.body.removeEventListener('mouseout', handleMouseout);
+    document.body.removeEventListener('keydown', handleEsc);
+  };
+  const handleClick = (e) => {
+    e.preventDefault();
+    const el = getEl(e);
+    if (el) {
+      el.remove();
+      unmount();
+    }
+  };
+  const handleEsc = (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      unmount();
+    }
+  };
+  document.body.addEventListener('click', handleClick);
+  document.body.addEventListener('mouseover', handleMouseover);
+  document.body.addEventListener('mouseout', handleMouseout);
+  document.body.addEventListener('keydown', handleEsc);
+})();
+```
+
+Deletes an element on click (Active until page reload or Esc key pressed)
+
+```
+javascript: (() => {
+  const getEl = (e) => {
+    const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
+    const idx = Array.from(tags).indexOf(e.target);
+    return idx === -1 ? null : tags[idx];
+  };
+  const handleMouseover = (e) => {
+    const el = getEl(e);
+    if (el) {
+      el.style.outline = 'dashed';
+    }
+  };
+  const handleMouseout = (e) => {
+    const el = getEl(e);
+    if (el) {
+      el.style.outline = '';
+    }
+  };
+  const handleClick = (e) => {
+    e.preventDefault();
+    const el = getEl(e);
+    if (el) {
+      el.remove();
+    }
+  };
+  const unmount = () => {
+    document.body.removeEventListener('click', handleClick);
+    document.body.removeEventListener('mouseover', handleMouseover);
+    document.body.removeEventListener('mouseout', handleMouseout);
+    document.body.removeEventListener('keydown', handleEsc);
+  };
+  const handleEsc = (e) => {
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      unmount();
+    }
+  };
+  document.body.addEventListener('click', handleClick);
+  document.body.addEventListener('mouseover', handleMouseover);
+  document.body.addEventListener('mouseout', handleMouseout);
+  document.body.addEventListener('keydown', handleEsc);
+})();
+```
+
 ## Check website data
 
 Reads and displays your cookie data.
