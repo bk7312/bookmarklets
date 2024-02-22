@@ -8,7 +8,7 @@ What are [bookmarklets](https://en.wikipedia.org/wiki/Bookmarklet)? They are bas
 
 To install a bookmarklet, create a new bookmark and paste the code into the URL bar. See examples below, images taken from [freeCodeCamp](https://www.freecodecamp.org/news/what-are-bookmarklets/).
 
-Alternatively, if the bookmarklet is available as a link, you can drag and drop it to your bookmark bar instead.
+Alternatively, if the bookmarklet is available as a link, you can also drag and drop to your bookmarks to install.
 
 **Only install bookmarklets from sources you trust and whenever possible, review the code before running it!**
 

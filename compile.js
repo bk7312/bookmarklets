@@ -17,7 +17,9 @@ lines.forEach((line) => {
       path.join(__dirname, 'bookmarklets/' + filePath),
       'utf8'
     );
-    text += `<a href="${he.encode(code)}">${filePath}</a>`;
+    text += `<a class='btn' href="${he.encode(
+      code
+    )}" title="To install, drag and drop this link to your bookmarks">${filePath}</a>`;
     text += '\n```\n' + code + '```\n\n';
   } else {
     text += line + '\n';

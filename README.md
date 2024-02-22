@@ -8,6 +8,8 @@ What are [bookmarklets](https://en.wikipedia.org/wiki/Bookmarklet)? They are bas
 
 To install a bookmarklet, create a new bookmark and paste the code into the URL bar. See examples below, images taken from [freeCodeCamp](https://www.freecodecamp.org/news/what-are-bookmarklets/).
 
+Alternatively, if the bookmarklet is available as a link, you can also drag and drop to your bookmarks to install.
+
 **Only install bookmarklets from sources you trust and whenever possible, review the code before running it!**
 
 #### Example using Firefox:
@@ -34,7 +36,7 @@ Able to change playback speed, restart the video, rewind or fast forward in 10s 
 
 Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const vidControl = document.querySelector(&#x27;#vidControl-div&#x27;);
   if (vidControl) {
     return vidControl.remove();
@@ -76,7 +78,7 @@ Note: Due to the use of innerHTML, this bookmarklet will not work on sites that 
     &#x60;;
   document.body.appendChild(div);
 })();
-">vid-controller.js</a>
+" title="To install, drag and drop this link to your bookmarks">vid-controller.js</a>
 ```
 javascript: (() => {
   const vidControl = document.querySelector('#vidControl-div');
@@ -127,7 +129,7 @@ javascript: (() => {
 
 Toggles the default HTML5 video controls and remove all controlsList attributes.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const vid = document.querySelector(&#x27;video&#x27;);
   if (!vid) {
     return alert(&#x27;No video tags found&#x27;);
@@ -137,7 +139,7 @@ Toggles the default HTML5 video controls and remove all controlsList attributes.
   vid.controlsList = &#x27;&#x27;;
   console.log(&#x27;ControlsList after overwrite:&#x27;, vid.controlsList);
 })();
-">vid-toggle-ctrl.js</a>
+" title="To install, drag and drop this link to your bookmarks">vid-toggle-ctrl.js</a>
 ```
 javascript: (() => {
   const vid = document.querySelector('video');
@@ -156,7 +158,7 @@ javascript: (() => {
 
 Changes the first video's playback speed, should work with youtube/vimeo and etc, also shows the current playback speed.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const vid = document.querySelector(&#x27;video&#x27;);
   if (!vid) {
     return alert(&#x27;No video tags found&#x27;);
@@ -164,7 +166,7 @@ Changes the first video's playback speed, should work with youtube/vimeo and etc
   const x = prompt(&#x60;Playback Speed? (Current: ${vid.playbackRate})&#x60;);
   vid.playbackRate = parseFloat(x);
 })();
-">vid-speed.js</a>
+" title="To install, drag and drop this link to your bookmarks">vid-speed.js</a>
 ```
 javascript: (() => {
   const vid = document.querySelector('video');
@@ -181,7 +183,7 @@ javascript: (() => {
 
 Useful if there are multiple videos in a single page, changes the playback speed for all videos.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const vid = document.querySelectorAll(&#x27;video&#x27;);
   if (vid.length === 0) {
     return alert(&#x27;No video tags found&#x27;);
@@ -189,7 +191,7 @@ Useful if there are multiple videos in a single page, changes the playback speed
   const x = prompt(&#x60;Playback Speed?&#x60;);
   vid.forEach((v) =&#x3E; (v.playbackRate = parseFloat(x)));
 })();
-">vid-speed-all.js</a>
+" title="To install, drag and drop this link to your bookmarks">vid-speed-all.js</a>
 ```
 javascript: (() => {
   const vid = document.querySelectorAll('video');
@@ -206,14 +208,14 @@ javascript: (() => {
 
 Able to play/pause the first video, useful if video controls are hidden but recommend to use the video controller bookmarklet instead.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const vid = document.querySelector(&#x27;video&#x27;);
   if (!vid) {
     return alert(&#x27;No video tags found&#x27;);
   }
   vid.paused ? vid.play() : vid.pause();
 })();
-">vid-play-pause.js</a>
+" title="To install, drag and drop this link to your bookmarks">vid-play-pause.js</a>
 ```
 javascript: (() => {
   const vid = document.querySelector('video');
@@ -241,7 +243,7 @@ Able to change playback speed, restart the audio, rewind or fast forward in 10s 
 
 Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const audControl = document.querySelector(&#x27;#audControl-div&#x27;);
   if (audControl) {
     return audControl.remove();
@@ -283,7 +285,7 @@ Note: Due to the use of innerHTML, this bookmarklet will not work on sites that 
   &#x60;;
   document.body.appendChild(div);
 })();
-">aud-controller.js</a>
+" title="To install, drag and drop this link to your bookmarks">aud-controller.js</a>
 ```
 javascript: (() => {
   const audControl = document.querySelector('#audControl-div');
@@ -334,7 +336,7 @@ javascript: (() => {
 
 Toggles the default HTML5 audio controls and remove all controlsList attributes.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const aud = document.querySelector(&#x27;audio&#x27;);
   if (!aud) {
     return alert(&#x27;No audio tags found&#x27;);
@@ -344,7 +346,7 @@ Toggles the default HTML5 audio controls and remove all controlsList attributes.
   aud.controlsList = &#x27;&#x27;;
   console.log(&#x27;ControlsList after overwrite:&#x27;, aud.controlsList);
 })();
-">aud-toggle-ctrl.js</a>
+" title="To install, drag and drop this link to your bookmarks">aud-toggle-ctrl.js</a>
 ```
 javascript: (() => {
   const aud = document.querySelector('audio');
@@ -363,7 +365,7 @@ javascript: (() => {
 
 Changes the first audio's playback speed, also shows the current playback speed.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const aud = document.querySelector(&#x27;audio&#x27;);
   if (!aud) {
     return alert(&#x27;No audio tags found&#x27;);
@@ -371,7 +373,7 @@ Changes the first audio's playback speed, also shows the current playback speed.
   const x = prompt(&#x60;Playback Speed? (Current: ${aud.playbackRate})&#x60;);
   aud.playbackRate = parseFloat(x);
 })();
-">aud-speed.js</a>
+" title="To install, drag and drop this link to your bookmarks">aud-speed.js</a>
 ```
 javascript: (() => {
   const aud = document.querySelector('audio');
@@ -388,7 +390,7 @@ javascript: (() => {
 
 Useful if there are multiple audios in a single page, changes the playback speed for all audios.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const aud = document.querySelectorAll(&#x27;audio&#x27;);
   if (aud.length === 0) {
     return alert(&#x27;No audio tags found&#x27;);
@@ -396,7 +398,7 @@ Useful if there are multiple audios in a single page, changes the playback speed
   const x = prompt(&#x60;Playback Speed?&#x60;);
   aud.forEach((a) =&#x3E; (a.playbackRate = parseFloat(x)));
 })();
-">aud-speed-all.js</a>
+" title="To install, drag and drop this link to your bookmarks">aud-speed-all.js</a>
 ```
 javascript: (() => {
   const aud = document.querySelectorAll('audio');
@@ -413,14 +415,14 @@ javascript: (() => {
 
 Able to play/pause the first audio, useful if audio controls are hidden but recommend to use the audio controller bookmarklet instead.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const aud = document.querySelector(&#x27;audio&#x27;);
   if (!aud) {
     return alert(&#x27;No audio tags found&#x27;);
   }
   aud.paused ? aud.play() : aud.pause();
 })();
-">aud-play-pause.js</a>
+" title="To install, drag and drop this link to your bookmarks">aud-play-pause.js</a>
 ```
 javascript: (() => {
   const aud = document.querySelector('audio');
@@ -442,7 +444,7 @@ Creates a set of buttons showing the iframe's source URL (opens in new tab when 
 
 Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const ipd = document.querySelector(&#x27;#iframe-panel-div&#x27;);
   if (ipd) {
     return ipd.remove();
@@ -488,7 +490,7 @@ Note: Due to the use of innerHTML, this bookmarklet will not work on sites that 
   &#x60;;
   document.body.appendChild(div);
 })();
-">iframe-panel.js</a>
+" title="To install, drag and drop this link to your bookmarks">iframe-panel.js</a>
 ```
 javascript: (() => {
   const ipd = document.querySelector('#iframe-panel-div');
@@ -543,7 +545,7 @@ javascript: (() => {
 
 Less versatile but works if the above bookmarklet doesn't.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const iframes = document.querySelectorAll(&#x27;iframe&#x27;);
   if (iframes.length === 0) {
     return alert(&#x27;No iframes found&#x27;);
@@ -552,7 +554,7 @@ Less versatile but works if the above bookmarklet doesn't.
   iframes.forEach((i, idx) =&#x3E; (src += &#x60;${idx + 1}: ${i.src}, &#x60;));
   alert(&#x60;${iframes.length} iframes found, ${src}&#x60;);
 })();
-">iframe-alert.js</a>
+" title="To install, drag and drop this link to your bookmarks">iframe-alert.js</a>
 ```
 javascript: (() => {
   const iframes = document.querySelectorAll('iframe');
@@ -594,7 +596,7 @@ Uses the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDr
 
 Also converts the HEX code to RGB and HSL values, code for converting RGB to HSL referenced from https://www.30secondsofcode.org/js/s/rgb-to-hsl/
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const x = new EyeDropper();
   x.open()
     .then((res) =&#x3E; {
@@ -634,7 +636,7 @@ Also converts the HEX code to RGB and HSL values, code for converting RGB to HSL
     })
     .catch((e) =&#x3E; alert(&#x60;Error: ${e}&#x60;));
 })();
-">color-eyedropper.js</a>
+" title="To install, drag and drop this link to your bookmarks">color-eyedropper.js</a>
 ```
 javascript: (() => {
   const x = new EyeDropper();
@@ -691,7 +693,7 @@ data:text/html;charset=utf-8,<input type='color'/>
 
 Or alternatively, the bookmarklet below opens a color input element on a new popup window. Referenced from https://css-tricks.com/web-development-bookmarklets/#comment-1795325, lightly modified for readability and to set the popup on the bottom right corner.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   const windowFeatures = &#x60;
     popup,
     width=100,
@@ -702,7 +704,7 @@ Or alternatively, the bookmarklet below opens a color input element on a new pop
   window.open(&#x27;&#x27;, &#x27;&#x27;, windowFeatures).document.body.innerHTML =
     &#x27;&#x3C;input type=&#x22;color&#x22;&#x3E;&#x27;;
 })();
-">color-popup.js</a>
+" title="To install, drag and drop this link to your bookmarks">color-popup.js</a>
 ```
 javascript: (() => {
   const windowFeatures = `
@@ -722,13 +724,13 @@ javascript: (() => {
 
 Simple bookmarklet to center the webpage, limit the width, and change the line height. Usually only works on simple websites, might break certain websites.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   b = document.body.style;
   b.margin = &#x27;1em auto&#x27;;
   b.maxWidth = &#x27;80ch&#x27;;
   b.lineHeight = &#x27;1.5&#x27;;
 })();
-">simple-center.js</a>
+" title="To install, drag and drop this link to your bookmarks">simple-center.js</a>
 ```
 javascript: (() => {
   b = document.body.style;
@@ -743,10 +745,10 @@ javascript: (() => {
 
 Toggles [designMode](https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode) to make website editable.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   document.designMode = document.designMode === &#x27;on&#x27; ? &#x27;off&#x27; : &#x27;on&#x27;;
 })();
-">toggle-designmode.js</a>
+" title="To install, drag and drop this link to your bookmarks">toggle-designmode.js</a>
 ```
 javascript: (() => {
   document.designMode = document.designMode === 'on' ? 'off' : 'on';
@@ -758,7 +760,7 @@ javascript: (() => {
 
 Deletes an element on click (One time only)
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   let mouseX = 0;
   let mouseY = 0;
   const getEl = (e) =&#x3E; {
@@ -806,7 +808,7 @@ Deletes an element on click (One time only)
   document.body.addEventListener(&#x27;mouseout&#x27;, handleMouseout);
   document.body.addEventListener(&#x27;keydown&#x27;, handleEsc);
 })();
-">delete-element-one.js</a>
+" title="To install, drag and drop this link to your bookmarks">delete-element-one.js</a>
 ```
 javascript: (() => {
   let mouseX = 0;
@@ -861,7 +863,7 @@ javascript: (() => {
 
 Deletes an element on click (Active until page reload or Esc key pressed)
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   let mouseX = 0;
   let mouseY = 0;
   const getEl = (e) =&#x3E; {
@@ -908,7 +910,7 @@ Deletes an element on click (Active until page reload or Esc key pressed)
   document.body.addEventListener(&#x27;mouseout&#x27;, handleMouseout);
   document.body.addEventListener(&#x27;keydown&#x27;, handleEsc);
 })();
-">delete-element.js</a>
+" title="To install, drag and drop this link to your bookmarks">delete-element.js</a>
 ```
 javascript: (() => {
   let mouseX = 0;
@@ -964,8 +966,8 @@ javascript: (() => {
 
 Reads and displays your cookie data.
 
-<a href="javascript: (() =&#x3E; alert(document.cookie || &#x27;No cookies found&#x27;))();
-">show-cookies.js</a>
+<a class='btn' href="javascript: (() =&#x3E; alert(document.cookie || &#x27;No cookies found&#x27;))();
+" title="To install, drag and drop this link to your bookmarks">show-cookies.js</a>
 ```
 javascript: (() => alert(document.cookie || 'No cookies found'))();
 ```
@@ -973,7 +975,7 @@ javascript: (() => alert(document.cookie || 'No cookies found'))();
 
 Reads and displays your localStorage data.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   if (localStorage.length === 0) {
     return alert(&#x27;No data in localStorage found&#x27;);
   }
@@ -983,7 +985,7 @@ Reads and displays your localStorage data.
   }
   alert(str);
 })();
-">show-localstorage.js</a>
+" title="To install, drag and drop this link to your bookmarks">show-localstorage.js</a>
 ```
 javascript: (() => {
   if (localStorage.length === 0) {
@@ -1000,7 +1002,7 @@ javascript: (() => {
 
 Reads and displays your sessionStorage data.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   if (sessionStorage.length === 0) {
     return alert(&#x27;No data in sessionStorage found&#x27;);
   }
@@ -1010,7 +1012,7 @@ Reads and displays your sessionStorage data.
   }
   alert(str);
 })();
-">show-sessionstorage.js</a>
+" title="To install, drag and drop this link to your bookmarks">show-sessionstorage.js</a>
 ```
 javascript: (() => {
   if (sessionStorage.length === 0) {
@@ -1035,7 +1037,7 @@ https://github.com/t-mart/kill-sticky
 
 Here's a modified version I use that doesn't remove position fixed/sticky but makes them static instead.
 
-<a href="javascript: (() =&#x3E; {
+<a class='btn' href="javascript: (() =&#x3E; {
   document.querySelectorAll(&#x27;body *&#x27;).forEach((node) =&#x3E; {
     if ([&#x27;fixed&#x27;, &#x27;sticky&#x27;].includes(getComputedStyle(node).position)) {
       node.style.position = &#x27;static&#x27;;
@@ -1058,7 +1060,7 @@ Here's a modified version I use that doesn't remove position fixed/sticky but ma
   htmlNode.style[&#x27;overflow-x&#x27;] = &#x27;visible&#x27;;
   htmlNode.style[&#x27;overflow-y&#x27;] = &#x27;visible&#x27;;
 })();
-">kill-sticky-mod.js</a>
+" title="To install, drag and drop this link to your bookmarks">kill-sticky-mod.js</a>
 ```
 javascript: (() => {
   document.querySelectorAll('body *').forEach((node) => {
