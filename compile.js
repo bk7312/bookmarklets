@@ -1,9 +1,13 @@
 const fs = require('fs');
 const path = require('path');
 const he = require('he');
+const marked = require('marked');
 
-const template = fs.readFileSync('template.md', 'utf8');
-const lines = template.split('\n');
+const index = fs.readFileSync('index_template.html', 'utf8');
+const readme = fs.readFileSync('readme_template.md', 'utf8');
+
+const indexSplit = index.split('%%%');
+const lines = readme.split('\n');
 
 let text = '';
 lines.forEach((line) => {
@@ -20,4 +24,7 @@ lines.forEach((line) => {
   }
 });
 
+const html = marked.parse(text);
+
 fs.writeFileSync(`README.md`, text);
+fs.writeFileSync(`index.html`, indexSplit.join(html));
