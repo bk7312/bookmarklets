@@ -1,4 +1,8 @@
 javascript: (() => {
+  if (typeof window.EyeDropper === 'undefined') {
+    alert("Your browser doens't support the EyeDropper API");
+    return;
+  }
   const x = new EyeDropper();
   x.open()
     .then((res) => {

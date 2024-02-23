@@ -36,28 +36,8 @@ Able to change playback speed, restart the video, rewind or fast forward in 10s 
 
 Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const vidControl = document.querySelector(&#x27;#vidControl-div&#x27;);
-  if (vidControl) {
-    return vidControl.remove();
-  }
-  if (!document.querySelector(&#x27;video&#x27;)) {
-    return alert(&#x27;No video tags found&#x27;);
-  }
-  const div = document.createElement(&#x27;div&#x27;);
-  div.id = &#x27;vidControl-div&#x27;;
-  div.style.zIndex = &#x27;9999&#x27;;
-  div.style.position = &#x27;fixed&#x27;;
-  div.style.top = &#x27;0%&#x27;;
-  div.style.right = &#x27;0%&#x27;;
-  div.style.display = &#x27;flex&#x27;;
-  div.style.gap = &#x27;0.2em&#x27;;
-  div.style.padding = &#x27;0.1em&#x27;;
-  div.style.userSelect = &#x27;none&#x27;;
-  div.innerHTML = &#x60;
-    &#x3C;button id=&#x22;vc-s&#x22; style=&#x22;pointer-events: none;&#x22;&#x3E;${document
-      .querySelector(&#x27;video&#x27;)
-      .playbackRate.toFixed(1)}x&#x3C;/button&#x3E;
+<a class='btn' href="javascript:(()=&#x3E;{var vidControl=document.querySelector(&#x22;#vidControl-div&#x22;);return vidControl?vidControl.remove():document.querySelector(&#x22;video&#x22;)?((vidControl=document.createElement(&#x22;div&#x22;)).id=&#x22;vidControl-div&#x22;,vidControl.style.zIndex=&#x22;9999&#x22;,vidControl.style.position=&#x22;fixed&#x22;,vidControl.style.top=&#x22;0%&#x22;,vidControl.style.right=&#x22;0%&#x22;,vidControl.style.display=&#x22;flex&#x22;,vidControl.style.gap=&#x22;0.2em&#x22;,vidControl.style.padding=&#x22;0.1em&#x22;,vidControl.style.userSelect=&#x22;none&#x22;,vidControl.innerHTML=&#x60;
+    &#x3C;button id=&#x22;vc-s&#x22; style=&#x22;pointer-events: none;&#x22;&#x3E;${document.querySelector(&#x22;video&#x22;).playbackRate.toFixed(1)}x&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.playbackRate -= 0.2; document.querySelector(&#x27;#vc-s&#x27;).textContent = vid.playbackRate.toFixed(1) + &#x27;x&#x27;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;-&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.playbackRate = 1; document.querySelector(&#x27;#vc-s&#x27;).textContent = vid.playbackRate.toFixed(1) + &#x27;x&#x27;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;1x&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.playbackRate = 2; document.querySelector(&#x27;#vc-s&#x27;).textContent = vid.playbackRate.toFixed(1) + &#x27;x&#x27;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;2x&#x3C;/button&#x3E;
@@ -65,20 +45,11 @@ Note: Due to the use of innerHTML, this bookmarklet will not work on sites that 
     &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.playbackRate += 0.2; document.querySelector(&#x27;#vc-s&#x27;).textContent = vid.playbackRate.toFixed(1) + &#x27;x&#x27;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;+&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;document.querySelector(&#x27;video&#x27;).currentTime = 0;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;Restart&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;document.querySelector(&#x27;video&#x27;).currentTime -= 10;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;-10s&#x3C;/button&#x3E;
-    &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.paused ? vid.play() : vid.pause(); document.querySelector(&#x27;#vc-p&#x27;).textContent = vid.paused ? &#x27;Play&#x27; : &#x27;Pause&#x27;&#x22; id=&#x22;vc-p&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${
-      document.querySelector(&#x27;video&#x27;).paused ? &#x27;Play&#x27; : &#x27;Pause&#x27;
-    }&#x3C;/button&#x3E;
+    &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.paused ? vid.play() : vid.pause(); document.querySelector(&#x27;#vc-p&#x27;).textContent = vid.paused ? &#x27;Play&#x27; : &#x27;Pause&#x27;&#x22; id=&#x22;vc-p&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${document.querySelector(&#x22;video&#x22;).paused?&#x22;Play&#x22;:&#x22;Pause&#x22;}&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;document.querySelector(&#x27;video&#x27;).currentTime += 10;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;+10s&#x3C;/button&#x3E;
-    &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.muted = !vid.muted; document.querySelector(&#x27;#vc-m&#x27;).textContent = vid.muted ? &#x27;Unmute&#x27; : &#x27;Mute&#x27;&#x22; id=&#x22;vc-m&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${
-      document.querySelector(&#x27;video&#x27;).loop ? &#x27;Unmute&#x27; : &#x27;Mute&#x27;
-    }&#x3C;/button&#x3E;
-    &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.loop = !vid.loop; document.querySelector(&#x27;#vc-l&#x27;).textContent = vid.loop ? &#x27;Loop ON&#x27; : &#x27;Loop OFF&#x27;&#x22; id=&#x22;vc-l&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${
-      document.querySelector(&#x27;video&#x27;).loop ? &#x27;Loop ON&#x27; : &#x27;Loop OFF&#x27;
-    }&#x3C;/button&#x3E;
-    &#x60;;
-  document.body.appendChild(div);
-})();
-" title="To install, drag and drop this link to your bookmarks">vid-controller.js</a>
+    &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.muted = !vid.muted; document.querySelector(&#x27;#vc-m&#x27;).textContent = vid.muted ? &#x27;Unmute&#x27; : &#x27;Mute&#x27;&#x22; id=&#x22;vc-m&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${document.querySelector(&#x22;video&#x22;).loop?&#x22;Unmute&#x22;:&#x22;Mute&#x22;}&#x3C;/button&#x3E;
+    &#x3C;button onclick=&#x22;const vid = document.querySelector(&#x27;video&#x27;); vid.loop = !vid.loop; document.querySelector(&#x27;#vc-l&#x27;).textContent = vid.loop ? &#x27;Loop ON&#x27; : &#x27;Loop OFF&#x27;&#x22; id=&#x22;vc-l&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${document.querySelector(&#x22;video&#x22;).loop?&#x22;Loop ON&#x22;:&#x22;Loop OFF&#x22;}&#x3C;/button&#x3E;
+    &#x60;,document.body.appendChild(vidControl),void 0):alert(&#x22;No video tags found&#x22;)})();" title="To install, drag and drop this link to your bookmarks">vid-controller.js</a>
 ```
 javascript: (() => {
   const vidControl = document.querySelector('#vidControl-div');
@@ -129,17 +100,7 @@ javascript: (() => {
 
 Toggles the default HTML5 video controls and remove all controlsList attributes.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const vid = document.querySelector(&#x27;video&#x27;);
-  if (!vid) {
-    return alert(&#x27;No video tags found&#x27;);
-  }
-  vid.controls = !vid.controls;
-  console.log(&#x27;ControlsList before overwrite:&#x27;, vid.controlsList);
-  vid.controlsList = &#x27;&#x27;;
-  console.log(&#x27;ControlsList after overwrite:&#x27;, vid.controlsList);
-})();
-" title="To install, drag and drop this link to your bookmarks">vid-toggle-ctrl.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{var vid=document.querySelector(&#x22;video&#x22;);return vid?(vid.controls=!vid.controls,console.log(&#x22;ControlsList before overwrite:&#x22;,vid.controlsList),vid.controlsList=&#x22;&#x22;,console.log(&#x22;ControlsList after overwrite:&#x22;,vid.controlsList),void 0):alert(&#x22;No video tags found&#x22;)})();" title="To install, drag and drop this link to your bookmarks">vid-toggle-ctrl.js</a>
 ```
 javascript: (() => {
   const vid = document.querySelector('video');
@@ -158,15 +119,7 @@ javascript: (() => {
 
 Changes the first video's playback speed, should work with youtube/vimeo and etc, also shows the current playback speed.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const vid = document.querySelector(&#x27;video&#x27;);
-  if (!vid) {
-    return alert(&#x27;No video tags found&#x27;);
-  }
-  const x = prompt(&#x60;Playback Speed? (Current: ${vid.playbackRate})&#x60;);
-  vid.playbackRate = parseFloat(x);
-})();
-" title="To install, drag and drop this link to your bookmarks">vid-speed.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{var x,vid=document.querySelector(&#x22;video&#x22;);return vid?(x=prompt(&#x60;Playback Speed? (Current: ${vid.playbackRate})&#x60;),vid.playbackRate=parseFloat(x),void 0):alert(&#x22;No video tags found&#x22;)})();" title="To install, drag and drop this link to your bookmarks">vid-speed.js</a>
 ```
 javascript: (() => {
   const vid = document.querySelector('video');
@@ -183,15 +136,7 @@ javascript: (() => {
 
 Useful if there are multiple videos in a single page, changes the playback speed for all videos.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const vid = document.querySelectorAll(&#x27;video&#x27;);
-  if (vid.length === 0) {
-    return alert(&#x27;No video tags found&#x27;);
-  }
-  const x = prompt(&#x60;Playback Speed?&#x60;);
-  vid.forEach((v) =&#x3E; (v.playbackRate = parseFloat(x)));
-})();
-" title="To install, drag and drop this link to your bookmarks">vid-speed-all.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{var vid=document.querySelectorAll(&#x22;video&#x22;);if(0===vid.length)return alert(&#x22;No video tags found&#x22;);const x=prompt(&#x22;Playback Speed?&#x22;);vid.forEach(v=&#x3E;v.playbackRate=parseFloat(x))})();" title="To install, drag and drop this link to your bookmarks">vid-speed-all.js</a>
 ```
 javascript: (() => {
   const vid = document.querySelectorAll('video');
@@ -208,14 +153,7 @@ javascript: (() => {
 
 Able to play/pause the first video, useful if video controls are hidden but recommend to use the video controller bookmarklet instead.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const vid = document.querySelector(&#x27;video&#x27;);
-  if (!vid) {
-    return alert(&#x27;No video tags found&#x27;);
-  }
-  vid.paused ? vid.play() : vid.pause();
-})();
-" title="To install, drag and drop this link to your bookmarks">vid-play-pause.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{var vid=document.querySelector(&#x22;video&#x22;);return vid?(vid.paused?vid.play():vid.pause(),void 0):alert(&#x22;No video tags found&#x22;)})();" title="To install, drag and drop this link to your bookmarks">vid-play-pause.js</a>
 ```
 javascript: (() => {
   const vid = document.querySelector('video');
@@ -243,28 +181,8 @@ Able to change playback speed, restart the audio, rewind or fast forward in 10s 
 
 Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const audControl = document.querySelector(&#x27;#audControl-div&#x27;);
-  if (audControl) {
-    return audControl.remove();
-  }
-  if (!document.querySelector(&#x27;audio&#x27;)) {
-    return alert(&#x27;No audio tags found&#x27;);
-  }
-  const div = document.createElement(&#x27;div&#x27;);
-  div.id = &#x27;audControl-div&#x27;;
-  div.style.zIndex = &#x27;9999&#x27;;
-  div.style.position = &#x27;fixed&#x27;;
-  div.style.top = &#x27;0%&#x27;;
-  div.style.right = &#x27;0%&#x27;;
-  div.style.display = &#x27;flex&#x27;;
-  div.style.gap = &#x27;0.2em&#x27;;
-  div.style.padding = &#x27;0.1em&#x27;;
-  div.style.userSelect = &#x27;none&#x27;;
-  div.innerHTML = &#x60;
-    &#x3C;button id=&#x22;ac-s&#x22; style=&#x22;pointer-events: none;&#x22;&#x3E;${document
-      .querySelector(&#x27;audio&#x27;)
-      .playbackRate.toFixed(1)}x&#x3C;/button&#x3E;
+<a class='btn' href="javascript:(()=&#x3E;{var audControl=document.querySelector(&#x22;#audControl-div&#x22;);return audControl?audControl.remove():document.querySelector(&#x22;audio&#x22;)?((audControl=document.createElement(&#x22;div&#x22;)).id=&#x22;audControl-div&#x22;,audControl.style.zIndex=&#x22;9999&#x22;,audControl.style.position=&#x22;fixed&#x22;,audControl.style.top=&#x22;0%&#x22;,audControl.style.right=&#x22;0%&#x22;,audControl.style.display=&#x22;flex&#x22;,audControl.style.gap=&#x22;0.2em&#x22;,audControl.style.padding=&#x22;0.1em&#x22;,audControl.style.userSelect=&#x22;none&#x22;,audControl.innerHTML=&#x60;
+    &#x3C;button id=&#x22;ac-s&#x22; style=&#x22;pointer-events: none;&#x22;&#x3E;${document.querySelector(&#x22;audio&#x22;).playbackRate.toFixed(1)}x&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.playbackRate -= 0.2; document.querySelector(&#x27;#ac-s&#x27;).textContent = aud.playbackRate.toFixed(1) + &#x27;x&#x27;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;-&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.playbackRate = 1; document.querySelector(&#x27;#ac-s&#x27;).textContent = aud.playbackRate.toFixed(1) + &#x27;x&#x27;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;1x&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.playbackRate = 2; document.querySelector(&#x27;#ac-s&#x27;).textContent = aud.playbackRate.toFixed(1) + &#x27;x&#x27;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;2x&#x3C;/button&#x3E;
@@ -272,20 +190,11 @@ Note: Due to the use of innerHTML, this bookmarklet will not work on sites that 
     &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.playbackRate += 0.2; document.querySelector(&#x27;#ac-s&#x27;).textContent = aud.playbackRate.toFixed(1) + &#x27;x&#x27;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;+&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;document.querySelector(&#x27;audio&#x27;).currentTime = 0;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;Restart&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;document.querySelector(&#x27;audio&#x27;).currentTime -= 10;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;-10s&#x3C;/button&#x3E;
-    &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.paused ? aud.play() : aud.pause(); document.querySelector(&#x27;#ac-p&#x27;).textContent = aud.paused ? &#x27;Play&#x27; : &#x27;Pause&#x27;&#x22; id=&#x22;ac-p&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${
-      document.querySelector(&#x27;audio&#x27;).paused ? &#x27;Play&#x27; : &#x27;Pause&#x27;
-    }&#x3C;/button&#x3E;
+    &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.paused ? aud.play() : aud.pause(); document.querySelector(&#x27;#ac-p&#x27;).textContent = aud.paused ? &#x27;Play&#x27; : &#x27;Pause&#x27;&#x22; id=&#x22;ac-p&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${document.querySelector(&#x22;audio&#x22;).paused?&#x22;Play&#x22;:&#x22;Pause&#x22;}&#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;document.querySelector(&#x27;audio&#x27;).currentTime += 10;&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;+10s&#x3C;/button&#x3E;
-    &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.muted = !aud.muted; document.querySelector(&#x27;#ac-m&#x27;).textContent = aud.muted ? &#x27;Unmute&#x27; : &#x27;Mute&#x27;&#x22; id=&#x22;ac-m&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${
-      document.querySelector(&#x27;audio&#x27;).loop ? &#x27;Unmute&#x27; : &#x27;Mute&#x27;
-    }&#x3C;/button&#x3E;
-    &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.loop = !aud.loop; document.querySelector(&#x27;#ac-l&#x27;).textContent = aud.loop ? &#x27;Loop ON&#x27; : &#x27;Loop OFF&#x27;&#x22; id=&#x22;ac-l&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${
-      document.querySelector(&#x27;audio&#x27;).loop ? &#x27;Loop ON&#x27; : &#x27;Loop OFF&#x27;
-    }&#x3C;/button&#x3E;
-  &#x60;;
-  document.body.appendChild(div);
-})();
-" title="To install, drag and drop this link to your bookmarks">aud-controller.js</a>
+    &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.muted = !aud.muted; document.querySelector(&#x27;#ac-m&#x27;).textContent = aud.muted ? &#x27;Unmute&#x27; : &#x27;Mute&#x27;&#x22; id=&#x22;ac-m&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${document.querySelector(&#x22;audio&#x22;).loop?&#x22;Unmute&#x22;:&#x22;Mute&#x22;}&#x3C;/button&#x3E;
+    &#x3C;button onclick=&#x22;const aud = document.querySelector(&#x27;audio&#x27;); aud.loop = !aud.loop; document.querySelector(&#x27;#ac-l&#x27;).textContent = aud.loop ? &#x27;Loop ON&#x27; : &#x27;Loop OFF&#x27;&#x22; id=&#x22;ac-l&#x22; style=&#x22;cursor: pointer;&#x22;&#x3E;${document.querySelector(&#x22;audio&#x22;).loop?&#x22;Loop ON&#x22;:&#x22;Loop OFF&#x22;}&#x3C;/button&#x3E;
+  &#x60;,document.body.appendChild(audControl),void 0):alert(&#x22;No audio tags found&#x22;)})();" title="To install, drag and drop this link to your bookmarks">aud-controller.js</a>
 ```
 javascript: (() => {
   const audControl = document.querySelector('#audControl-div');
@@ -336,17 +245,7 @@ javascript: (() => {
 
 Toggles the default HTML5 audio controls and remove all controlsList attributes.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const aud = document.querySelector(&#x27;audio&#x27;);
-  if (!aud) {
-    return alert(&#x27;No audio tags found&#x27;);
-  }
-  aud.controls = !aud.controls;
-  console.log(&#x27;ControlsList before overwrite:&#x27;, aud.controlsList);
-  aud.controlsList = &#x27;&#x27;;
-  console.log(&#x27;ControlsList after overwrite:&#x27;, aud.controlsList);
-})();
-" title="To install, drag and drop this link to your bookmarks">aud-toggle-ctrl.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{var aud=document.querySelector(&#x22;audio&#x22;);return aud?(aud.controls=!aud.controls,console.log(&#x22;ControlsList before overwrite:&#x22;,aud.controlsList),aud.controlsList=&#x22;&#x22;,console.log(&#x22;ControlsList after overwrite:&#x22;,aud.controlsList),void 0):alert(&#x22;No audio tags found&#x22;)})();" title="To install, drag and drop this link to your bookmarks">aud-toggle-ctrl.js</a>
 ```
 javascript: (() => {
   const aud = document.querySelector('audio');
@@ -365,15 +264,7 @@ javascript: (() => {
 
 Changes the first audio's playback speed, also shows the current playback speed.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const aud = document.querySelector(&#x27;audio&#x27;);
-  if (!aud) {
-    return alert(&#x27;No audio tags found&#x27;);
-  }
-  const x = prompt(&#x60;Playback Speed? (Current: ${aud.playbackRate})&#x60;);
-  aud.playbackRate = parseFloat(x);
-})();
-" title="To install, drag and drop this link to your bookmarks">aud-speed.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{var x,aud=document.querySelector(&#x22;audio&#x22;);return aud?(x=prompt(&#x60;Playback Speed? (Current: ${aud.playbackRate})&#x60;),aud.playbackRate=parseFloat(x),void 0):alert(&#x22;No audio tags found&#x22;)})();" title="To install, drag and drop this link to your bookmarks">aud-speed.js</a>
 ```
 javascript: (() => {
   const aud = document.querySelector('audio');
@@ -390,15 +281,7 @@ javascript: (() => {
 
 Useful if there are multiple audios in a single page, changes the playback speed for all audios.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const aud = document.querySelectorAll(&#x27;audio&#x27;);
-  if (aud.length === 0) {
-    return alert(&#x27;No audio tags found&#x27;);
-  }
-  const x = prompt(&#x60;Playback Speed?&#x60;);
-  aud.forEach((a) =&#x3E; (a.playbackRate = parseFloat(x)));
-})();
-" title="To install, drag and drop this link to your bookmarks">aud-speed-all.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{var aud=document.querySelectorAll(&#x22;audio&#x22;);if(0===aud.length)return alert(&#x22;No audio tags found&#x22;);const x=prompt(&#x22;Playback Speed?&#x22;);aud.forEach(a=&#x3E;a.playbackRate=parseFloat(x))})();" title="To install, drag and drop this link to your bookmarks">aud-speed-all.js</a>
 ```
 javascript: (() => {
   const aud = document.querySelectorAll('audio');
@@ -415,14 +298,7 @@ javascript: (() => {
 
 Able to play/pause the first audio, useful if audio controls are hidden but recommend to use the audio controller bookmarklet instead.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const aud = document.querySelector(&#x27;audio&#x27;);
-  if (!aud) {
-    return alert(&#x27;No audio tags found&#x27;);
-  }
-  aud.paused ? aud.play() : aud.pause();
-})();
-" title="To install, drag and drop this link to your bookmarks">aud-play-pause.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{var aud=document.querySelector(&#x22;audio&#x22;);return aud?(aud.paused?aud.play():aud.pause(),void 0):alert(&#x22;No audio tags found&#x22;)})();" title="To install, drag and drop this link to your bookmarks">aud-play-pause.js</a>
 ```
 javascript: (() => {
   const aud = document.querySelector('audio');
@@ -444,40 +320,9 @@ Creates a set of buttons showing the iframe's source URL (opens in new tab when 
 
 Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const ipd = document.querySelector(&#x27;#iframe-panel-div&#x27;);
-  if (ipd) {
-    return ipd.remove();
-  }
-  const iframes = document.querySelectorAll(&#x27;iframe&#x27;);
-  if (iframes.length === 0) {
-    return alert(&#x27;No iframes found&#x27;);
-  }
-  const div = document.createElement(&#x27;div&#x27;);
-  div.id = &#x27;iframe-panel-div&#x27;;
-  div.style.zIndex = &#x27;9999&#x27;;
-  div.style.position = &#x27;fixed&#x27;;
-  div.style.top = &#x27;0%&#x27;;
-  div.style.right = &#x27;0%&#x27;;
-  div.style.display = &#x27;flex&#x27;;
-  div.style.flexDirection = &#x27;column&#x27;;
-  div.style.gap = &#x27;0.2em&#x27;;
-  div.style.padding = &#x27;0.1em&#x27;;
-  div.style.userSelect = &#x27;none&#x27;;
-  div.style.maxWidth = &#x27;320px&#x27;;
-  div.style.maxHeight = &#x27;320px&#x27;;
-  div.style.overflow = &#x27;auto&#x27;;
-  let buttons = &#x27;&#x27;;
-  iframes.forEach((i) =&#x3E; {
-    buttons +=
-      i.src === &#x27;&#x27;
-        ? &#x60;&#x3C;button style=&#x22;pointer-events: none;&#x22;&#x3E;This iframe has no source&#x3C;/button&#x3E;&#x60;
-        : &#x60;&#x3C;button onclick=&#x22;window.open(&#x27;${i.src}&#x27;, &#x27;_blank&#x27;);&#x22; style=&#x22;cursor: pointer; width: 100%; overflow-wrap: anywhere;&#x22;&#x3E;${i.src}&#x3C;/button&#x3E;&#x60;;
-  });
-  div.innerHTML = &#x60;
+<a class='btn' href="javascript:(()=&#x3E;{var ipd=document.querySelector(&#x22;#iframe-panel-div&#x22;);if(ipd)return ipd.remove();ipd=document.querySelectorAll(&#x22;iframe&#x22;);if(0===ipd.length)return alert(&#x22;No iframes found&#x22;);var div=document.createElement(&#x22;div&#x22;);div.id=&#x22;iframe-panel-div&#x22;,div.style.zIndex=&#x22;9999&#x22;,div.style.position=&#x22;fixed&#x22;,div.style.top=&#x22;0%&#x22;,div.style.right=&#x22;0%&#x22;,div.style.display=&#x22;flex&#x22;,div.style.flexDirection=&#x22;column&#x22;,div.style.gap=&#x22;0.2em&#x22;,div.style.padding=&#x22;0.1em&#x22;,div.style.userSelect=&#x22;none&#x22;,div.style.maxWidth=&#x22;320px&#x22;,div.style.maxHeight=&#x22;320px&#x22;,div.style.overflow=&#x22;auto&#x22;;let buttons=&#x22;&#x22;;ipd.forEach(i=&#x3E;{buttons+=&#x22;&#x22;===i.src?&#x27;&#x3C;button style=&#x22;pointer-events: none;&#x22;&#x3E;This iframe has no source&#x3C;/button&#x3E;&#x27;:&#x60;&#x3C;button onclick=&#x22;window.open(&#x27;${i.src}&#x27;, &#x27;_blank&#x27;);&#x22; style=&#x22;cursor: pointer; width: 100%; overflow-wrap: anywhere;&#x22;&#x3E;${i.src}&#x3C;/button&#x3E;&#x60;}),div.innerHTML=&#x60;
     &#x3C;div style=&#x22;display: flex;&#x22;&#x3E;
-    &#x3C;button id=&#x22;vc-s&#x22; style=&#x22;pointer-events: none; flex-grow: 1;&#x22;&#x3E;\
-      ${iframes.length} iframe(s) found, source(s) below
+    &#x3C;button id=&#x22;vc-s&#x22; style=&#x22;pointer-events: none; flex-grow: 1;&#x22;&#x3E;      ${ipd.length} iframe(s) found, source(s) below
     &#x3C;/button&#x3E;
     &#x3C;button onclick=&#x22;document.querySelectorAll(&#x27;iframe&#x27;).forEach(i =&#x3E; i.remove())&#x22; style=&#x22;cursor: pointer; margin-left: auto;&#x22;&#x3E;
       Remove all
@@ -487,10 +332,7 @@ Note: Due to the use of innerHTML, this bookmarklet will not work on sites that 
       Click the url(s) to open in new tab
     &#x3C;/button&#x3E;
     ${buttons}
-  &#x60;;
-  document.body.appendChild(div);
-})();
-" title="To install, drag and drop this link to your bookmarks">iframe-panel.js</a>
+  &#x60;,document.body.appendChild(div)})();" title="To install, drag and drop this link to your bookmarks">iframe-panel.js</a>
 ```
 javascript: (() => {
   const ipd = document.querySelector('#iframe-panel-div');
@@ -545,16 +387,7 @@ javascript: (() => {
 
 Less versatile but works if the above bookmarklet doesn't.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const iframes = document.querySelectorAll(&#x27;iframe&#x27;);
-  if (iframes.length === 0) {
-    return alert(&#x27;No iframes found&#x27;);
-  }
-  let src = &#x27;&#x27;;
-  iframes.forEach((i, idx) =&#x3E; (src += &#x60;${idx + 1}: ${i.src}, &#x60;));
-  alert(&#x60;${iframes.length} iframes found, ${src}&#x60;);
-})();
-" title="To install, drag and drop this link to your bookmarks">iframe-alert.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{var iframes=document.querySelectorAll(&#x22;iframe&#x22;);if(0===iframes.length)return alert(&#x22;No iframes found&#x22;);let src=&#x22;&#x22;;iframes.forEach((i,idx)=&#x3E;src+=&#x60;${idx+1}: ${i.src}, &#x60;),alert(iframes.length+&#x22; iframes found, &#x22;+src)})();" title="To install, drag and drop this link to your bookmarks">iframe-alert.js</a>
 ```
 javascript: (() => {
   const iframes = document.querySelectorAll('iframe');
@@ -596,49 +429,13 @@ Uses the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDr
 
 Also converts the HEX code to RGB and HSL values, code for converting RGB to HSL referenced from https://www.30secondsofcode.org/js/s/rgb-to-hsl/
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const x = new EyeDropper();
-  x.open()
-    .then((res) =&#x3E; {
-      const hex = res.sRGBHex;
-      const r = parseInt(hex.slice(1, 3), 16);
-      const g = parseInt(hex.slice(3, 5), 16);
-      const b = parseInt(hex.slice(5), 16);
-      const rgbToHsl = (r, g, b) =&#x3E; {
-        r /= 255;
-        g /= 255;
-        b /= 255;
-        const l = Math.max(r, g, b);
-        const s = l - Math.min(r, g, b);
-        const h =
-          s !== 0
-            ? l === r
-              ? (g - b) / s
-              : l === g
-              ? 2 + (b - r) / s
-              : 4 + (r - g) / s
-            : 0;
-        return [
-          (60 * h &#x3C; 0 ? 60 * h + 360 : 60 * h).toFixed(2),
-          (
-            100 * (s ? (l &#x3C;= 0.5 ? s / (2 * l - s) : s / (2 - (2 * l - s))) : 0)
-          ).toFixed(2) + &#x27;%&#x27;,
-          ((100 * (2 * l - s)) / 2).toFixed(2) + &#x27;%&#x27;,
-        ];
-      };
-      alert(
-        &#x60;Color is ${res.sRGBHex}, rgb(${r} ${g} ${b}), hsl(${rgbToHsl(
-          r,
-          g,
-          b
-        ).join(&#x27; &#x27;)})&#x60;
-      );
-    })
-    .catch((e) =&#x3E; alert(&#x60;Error: ${e}&#x60;));
-})();
-" title="To install, drag and drop this link to your bookmarks">color-eyedropper.js</a>
+<a class='btn' href="javascript:void(void 0===window.EyeDropper?(alert(&#x22;Your browser doens&#x27;t support the EyeDropper API&#x22;),void 0):(new EyeDropper).open().then(res=&#x3E;{var hex=res.sRGBHex,r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),hex=parseInt(hex.slice(5),16);alert(&#x60;Color is ${res.sRGBHex}, rgb(${r} ${g} ${hex}), hsl(${((r,g,b)=&#x3E;{r/=255,g/=255,b/=255;var l=Math.max(r,g,b),s=l-Math.min(r,g,b),b=0!=s?l===r?(g-b)/s:l===g?2+(b-r)/s:4+(r-g)/s:0;return[(60*b&#x3C;0?60*b+360:60*b).toFixed(2),(100*(s?l&#x3C;=.5?s/(2*l-s):s/(2-(2*l-s)):0)).toFixed(2)+&#x22;%&#x22;,(100*(2*l-s)/2).toFixed(2)+&#x22;%&#x22;]})(r,g,hex).join(&#x22; &#x22;)})&#x60;)}).catch(e=&#x3E;alert(&#x22;Error: &#x22;+e)));" title="To install, drag and drop this link to your bookmarks">color-eyedropper.js</a>
 ```
 javascript: (() => {
+  if (typeof window.EyeDropper === 'undefined') {
+    alert("Your browser doens't support the EyeDropper API");
+    return;
+  }
   const x = new EyeDropper();
   x.open()
     .then((res) => {
@@ -693,18 +490,13 @@ data:text/html;charset=utf-8,<input type='color'/>
 
 Or alternatively, the bookmarklet below opens a color input element on a new popup window. Referenced from https://css-tricks.com/web-development-bookmarklets/#comment-1795325, lightly modified for readability and to set the popup on the bottom right corner.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  const windowFeatures = &#x60;
+<a class='btn' href="javascript:(()=&#x3E;{var windowFeatures=&#x60;
     popup,
     width=100,
     height=100,
     left=${window.screen.availWidth},
     top=${window.screen.availHeight},
-  &#x60;;
-  window.open(&#x27;&#x27;, &#x27;&#x27;, windowFeatures).document.body.innerHTML =
-    &#x27;&#x3C;input type=&#x22;color&#x22;&#x3E;&#x27;;
-})();
-" title="To install, drag and drop this link to your bookmarks">color-popup.js</a>
+  &#x60;;window.open(&#x22;&#x22;,&#x22;&#x22;,windowFeatures).document.body.innerHTML=&#x27;&#x3C;input type=&#x22;color&#x22;&#x3E;&#x27;})();" title="To install, drag and drop this link to your bookmarks">color-popup.js</a>
 ```
 javascript: (() => {
   const windowFeatures = `
@@ -724,13 +516,7 @@ javascript: (() => {
 
 Simple bookmarklet to center the webpage, limit the width, and change the line height. Usually only works on simple websites, might break certain websites.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  b = document.body.style;
-  b.margin = &#x27;1em auto&#x27;;
-  b.maxWidth = &#x27;80ch&#x27;;
-  b.lineHeight = &#x27;1.5&#x27;;
-})();
-" title="To install, drag and drop this link to your bookmarks">simple-center.js</a>
+<a class='btn' href="javascript:(b=document.body.style).margin=&#x22;1em auto&#x22;,b.maxWidth=&#x22;80ch&#x22;,void(b.lineHeight=&#x22;1.5&#x22;);" title="To install, drag and drop this link to your bookmarks">simple-center.js</a>
 ```
 javascript: (() => {
   b = document.body.style;
@@ -745,10 +531,7 @@ javascript: (() => {
 
 Toggles [designMode](https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode) to make website editable.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  document.designMode = document.designMode === &#x27;on&#x27; ? &#x27;off&#x27; : &#x27;on&#x27;;
-})();
-" title="To install, drag and drop this link to your bookmarks">toggle-designmode.js</a>
+<a class='btn' href="javascript:void(document.designMode=&#x22;on&#x22;===document.designMode?&#x22;off&#x22;:&#x22;on&#x22;);" title="To install, drag and drop this link to your bookmarks">toggle-designmode.js</a>
 ```
 javascript: (() => {
   document.designMode = document.designMode === 'on' ? 'off' : 'on';
@@ -760,55 +543,7 @@ javascript: (() => {
 
 Deletes an element on click (One time only)
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  let mouseX = 0;
-  let mouseY = 0;
-  const getEl = (e) =&#x3E; {
-    const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(e.target);
-    return idx === -1 ? null : tags[idx];
-  };
-  const handleMouseover = (e) =&#x3E; {
-    const el = getEl(e);
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    if (el) {
-      el.style.outline = &#x27;dashed&#x27;;
-    }
-  };
-  const handleMouseout = (e) =&#x3E; {
-    const el = getEl(e);
-    if (el) {
-      el.style.outline = &#x27;&#x27;;
-    }
-  };
-  const unmount = () =&#x3E; {
-    document.body.removeEventListener(&#x27;click&#x27;, handleClick);
-    document.body.removeEventListener(&#x27;mouseover&#x27;, handleMouseover);
-    document.body.removeEventListener(&#x27;mouseout&#x27;, handleMouseout);
-    document.body.removeEventListener(&#x27;keydown&#x27;, handleEsc);
-  };
-  const handleClick = (e) =&#x3E; {
-    e.preventDefault();
-    const el = getEl(e);
-    if (el) {
-      el.remove();
-      unmount();
-    }
-  };
-  const handleEsc = (e) =&#x3E; {
-    if (e.key === &#x27;Escape&#x27;) {
-      e.preventDefault();
-      document.elementFromPoint(mouseX, mouseY).style.outline = &#x27;&#x27;;
-      unmount();
-    }
-  };
-  document.body.addEventListener(&#x27;click&#x27;, handleClick);
-  document.body.addEventListener(&#x27;mouseover&#x27;, handleMouseover);
-  document.body.addEventListener(&#x27;mouseout&#x27;, handleMouseout);
-  document.body.addEventListener(&#x27;keydown&#x27;, handleEsc);
-})();
-" title="To install, drag and drop this link to your bookmarks">delete-element-one.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const getEl=e=&#x3E;{var tags=document.querySelectorAll(e.target.tagName.toLowerCase()),e=Array.from(tags).indexOf(e.target);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},unmount=()=&#x3E;{document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc)},handleClick=e=&#x3E;{e.preventDefault();e=getEl(e);e&#x26;&#x26;(e.remove(),unmount())},handleEsc=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,unmount())};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element-one.js</a>
 ```
 javascript: (() => {
   let mouseX = 0;
@@ -863,54 +598,7 @@ javascript: (() => {
 
 Deletes an element on click (Active until page reload or Esc key pressed)
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  let mouseX = 0;
-  let mouseY = 0;
-  const getEl = (e) =&#x3E; {
-    const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(e.target);
-    return idx === -1 ? null : tags[idx];
-  };
-  const handleMouseover = (e) =&#x3E; {
-    const el = getEl(e);
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    if (el) {
-      el.style.outline = &#x27;dashed&#x27;;
-    }
-  };
-  const handleMouseout = (e) =&#x3E; {
-    const el = getEl(e);
-    if (el) {
-      el.style.outline = &#x27;&#x27;;
-    }
-  };
-  const handleClick = (e) =&#x3E; {
-    e.preventDefault();
-    const el = getEl(e);
-    if (el) {
-      el.remove();
-    }
-  };
-  const unmount = () =&#x3E; {
-    document.body.removeEventListener(&#x27;click&#x27;, handleClick);
-    document.body.removeEventListener(&#x27;mouseover&#x27;, handleMouseover);
-    document.body.removeEventListener(&#x27;mouseout&#x27;, handleMouseout);
-    document.body.removeEventListener(&#x27;keydown&#x27;, handleEsc);
-  };
-  const handleEsc = (e) =&#x3E; {
-    if (e.key === &#x27;Escape&#x27;) {
-      e.preventDefault();
-      document.elementFromPoint(mouseX, mouseY).style.outline = &#x27;&#x27;;
-      unmount();
-    }
-  };
-  document.body.addEventListener(&#x27;click&#x27;, handleClick);
-  document.body.addEventListener(&#x27;mouseover&#x27;, handleMouseover);
-  document.body.addEventListener(&#x27;mouseout&#x27;, handleMouseout);
-  document.body.addEventListener(&#x27;keydown&#x27;, handleEsc);
-})();
-" title="To install, drag and drop this link to your bookmarks">delete-element.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const getEl=e=&#x3E;{var tags=document.querySelectorAll(e.target.tagName.toLowerCase()),e=Array.from(tags).indexOf(e.target);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},handleClick=e=&#x3E;{e.preventDefault();e=getEl(e);e&#x26;&#x26;e.remove()},handleEsc=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),void document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc))};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element.js</a>
 ```
 javascript: (() => {
   let mouseX = 0;
@@ -966,8 +654,7 @@ javascript: (() => {
 
 Reads and displays your cookie data.
 
-<a class='btn' href="javascript: (() =&#x3E; alert(document.cookie || &#x27;No cookies found&#x27;))();
-" title="To install, drag and drop this link to your bookmarks">show-cookies.js</a>
+<a class='btn' href="javascript:alert(document.cookie||&#x22;No cookies found&#x22;);" title="To install, drag and drop this link to your bookmarks">show-cookies.js</a>
 ```
 javascript: (() => alert(document.cookie || 'No cookies found'))();
 ```
@@ -975,24 +662,14 @@ javascript: (() => alert(document.cookie || 'No cookies found'))();
 
 Reads and displays your localStorage data.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  if (localStorage.length === 0) {
-    return alert(&#x27;No data in localStorage found&#x27;);
-  }
-  let str = &#x27;&#x27;;
-  for (let [k, v] of Object.entries(localStorage)) {
-    str += &#x60;key:${k}, val:${v}, &#x60;;
-  }
-  alert(str);
-})();
-" title="To install, drag and drop this link to your bookmarks">show-localstorage.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{if(0===window.localStorage.length)return alert(&#x22;No data in localStorage found&#x22;);let str=&#x22;&#x22;;for(var[k,v]of Object.entries(window.localStorage))str+=&#x60;key:${k}, val:${v}, &#x60;;alert(str)})();" title="To install, drag and drop this link to your bookmarks">show-localstorage.js</a>
 ```
 javascript: (() => {
-  if (localStorage.length === 0) {
+  if (window.localStorage.length === 0) {
     return alert('No data in localStorage found');
   }
   let str = '';
-  for (let [k, v] of Object.entries(localStorage)) {
+  for (let [k, v] of Object.entries(window.localStorage)) {
     str += `key:${k}, val:${v}, `;
   }
   alert(str);
@@ -1002,24 +679,14 @@ javascript: (() => {
 
 Reads and displays your sessionStorage data.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  if (sessionStorage.length === 0) {
-    return alert(&#x27;No data in sessionStorage found&#x27;);
-  }
-  let str = &#x27;&#x27;;
-  for (let [k, v] of Object.entries(sessionStorage)) {
-    str += &#x60;key:${k}, val:${v}, &#x60;;
-  }
-  alert(str);
-})();
-" title="To install, drag and drop this link to your bookmarks">show-sessionstorage.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{if(0===window.sessionStorage.length)return alert(&#x22;No data in sessionStorage found&#x22;);let str=&#x22;&#x22;;for(var[k,v]of Object.entries(window.sessionStorage))str+=&#x60;key:${k}, val:${v}, &#x60;;alert(str)})();" title="To install, drag and drop this link to your bookmarks">show-sessionstorage.js</a>
 ```
 javascript: (() => {
-  if (sessionStorage.length === 0) {
+  if (window.sessionStorage.length === 0) {
     return alert('No data in sessionStorage found');
   }
   let str = '';
-  for (let [k, v] of Object.entries(sessionStorage)) {
+  for (let [k, v] of Object.entries(window.sessionStorage)) {
     str += `key:${k}, val:${v}, `;
   }
   alert(str);
@@ -1037,30 +704,7 @@ https://github.com/t-mart/kill-sticky
 
 Here's a modified version I use that doesn't remove position fixed/sticky but makes them static instead.
 
-<a class='btn' href="javascript: (() =&#x3E; {
-  document.querySelectorAll(&#x27;body *&#x27;).forEach((node) =&#x3E; {
-    if ([&#x27;fixed&#x27;, &#x27;sticky&#x27;].includes(getComputedStyle(node).position)) {
-      node.style.position = &#x27;static&#x27;;
-    }
-  });
-  document.querySelectorAll(&#x27;html *&#x27;).forEach((node) =&#x3E; {
-    const s = getComputedStyle(node);
-    if (&#x27;hidden&#x27; === s[&#x27;overflow&#x27;]) {
-      node.style[&#x27;overflow&#x27;] = &#x27;visible&#x27;;
-    }
-    if (&#x27;hidden&#x27; === s[&#x27;overflow-x&#x27;]) {
-      node.style[&#x27;overflow-x&#x27;] = &#x27;visible&#x27;;
-    }
-    if (&#x27;hidden&#x27; === s[&#x27;overflow-y&#x27;]) {
-      node.style[&#x27;overflow-y&#x27;] = &#x27;visible&#x27;;
-    }
-  });
-  const htmlNode = document.querySelector(&#x27;html&#x27;);
-  htmlNode.style[&#x27;overflow&#x27;] = &#x27;visible&#x27;;
-  htmlNode.style[&#x27;overflow-x&#x27;] = &#x27;visible&#x27;;
-  htmlNode.style[&#x27;overflow-y&#x27;] = &#x27;visible&#x27;;
-})();
-" title="To install, drag and drop this link to your bookmarks">kill-sticky-mod.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{document.querySelectorAll(&#x22;body *&#x22;).forEach(node=&#x3E;{[&#x22;fixed&#x22;,&#x22;sticky&#x22;].includes(getComputedStyle(node).position)&#x26;&#x26;(node.style.position=&#x22;static&#x22;)}),document.querySelectorAll(&#x22;html *&#x22;).forEach(node=&#x3E;{var s=getComputedStyle(node);&#x22;hidden&#x22;===s.overflow&#x26;&#x26;(node.style.overflow=&#x22;visible&#x22;),&#x22;hidden&#x22;===s[&#x22;overflow-x&#x22;]&#x26;&#x26;(node.style[&#x22;overflow-x&#x22;]=&#x22;visible&#x22;),&#x22;hidden&#x22;===s[&#x22;overflow-y&#x22;]&#x26;&#x26;(node.style[&#x22;overflow-y&#x22;]=&#x22;visible&#x22;)});var htmlNode=document.querySelector(&#x22;html&#x22;);htmlNode.style.overflow=&#x22;visible&#x22;,htmlNode.style[&#x22;overflow-x&#x22;]=&#x22;visible&#x22;,htmlNode.style[&#x22;overflow-y&#x22;]=&#x22;visible&#x22;})();" title="To install, drag and drop this link to your bookmarks">kill-sticky-mod.js</a>
 ```
 javascript: (() => {
   document.querySelectorAll('body *').forEach((node) => {

@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "he": "^1.2.0",
-    "marked": "^12.0.0"
+    "marked": "^12.0.0",
+    "uglify-js": "^3.17.4"
   }
 }

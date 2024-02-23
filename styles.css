@@ -1,0 +1,40 @@
+html {
+  max-width: 70ch;
+  margin: auto;
+  line-height: 1.75;
+  font-size: 1.25em;
+}
+
+pre {
+  background-color: #eee;
+  padding: 1em;
+  overflow-x: auto;
+}
+
+.btn {
+  text-decoration: none;
+  color: white;
+  background-color: dodgerblue;
+  padding: 0.5rem 1rem;
+  border: 1px solid;
+}
+
+.btn:hover {
+  background-color: blue;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    background-color: #333;
+    color: #eee;
+  }
+  pre {
+    background-color: #555;
+  }
+  a {
+    color: #39f;
+  }
+  a:visited {
+    color: #b7b;
+  }
+}
