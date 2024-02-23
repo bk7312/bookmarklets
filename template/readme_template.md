@@ -8,7 +8,7 @@ What are [bookmarklets](https://en.wikipedia.org/wiki/Bookmarklet)? They are bas
 
 To install a bookmarklet, create a new bookmark and paste the code into the URL bar. See examples below, images taken from [freeCodeCamp](https://www.freecodecamp.org/news/what-are-bookmarklets/).
 
-Alternatively, if the bookmarklet is available as a link (if you're reading this from the website), you can also drag and drop it to your bookmarks menu to install. Note that the JS code in the bookmarklet link might be different as it has been minified.
+Alternatively, if the bookmarklet is available as a link, you can also drag and drop it to your bookmarks menu to install. Note that the JS code in the bookmarklet link might be different as it has been minified.
 
 **Only install bookmarklets from sources you trust and whenever possible, review the code before running it!**
 
@@ -20,89 +20,75 @@ Alternatively, if the bookmarklet is available as a link (if you're reading this
 
 ![chromium](https://github.com/bk7312/bookmarklets/assets/14029543/f53a55f2-ecc0-4a68-8231-e85bad099072)
 
-## Video-related bookmarklets
+## Delete element on click
 
-A collection of video-related bookmarklets, works as long as the website uses video tags. Applies to the first video on the website, won't work for videos inside an iframe.
+Deletes an element on click. Press the Esc key or right-click to exit, able to undo using Ctrl + Z or Cmd + Z (favorite bookmarklet thus far, fun to play with).
 
-If you want to apply to a video inside an iframe, use the iframe bookmarklet below to open the video iframe in a new tab, then try the video bookmarklet.
+@delete-element.js
 
-Note: It should be possible to repurpose these bookmarklets to work with audio content by changing the targeted HTML tag from 'video' to 'audio'.
+Deletes an element on click, one time only, no undo. Press the Esc key or right-click to cancel.
 
-#### Video Controller
+@delete-element-one.js
 
-Creates a small video playback controller fixed to the top right side of the screen, click the bookmarklet again to remove. Note that the controller buttons will be affected by the website's existing CSS.
+## Audio/Video-related bookmarklets
 
-Able to change playback speed, restart the video, rewind or fast forward in 10s increments, play/pause, and mute/unmute the video.
+A collection of audio/video-related bookmarklets, works as long as the website uses audio/video tags. Applies to the first audio/video on the website, won't work for audios/videos inside an iframe.
 
-Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
+Note: If you want to apply to a audio/video inside an iframe, use the iframe bookmarklet below to open the audio/video iframe in a new tab, then try the audio/video bookmarklet.
 
-@vid-controller.js
+#### Audio/Video Controller
 
-#### Toggles default HTML5 video controls
+Creates a small audio/video playback controller fixed to the top right side of the screen, click the bookmarklet again to remove. Note that the controller buttons will be affected by the website's existing CSS.
 
-Toggles the default HTML5 video controls and remove all controlsList attributes.
+Able to change playback speed, restart the audio/video, rewind or fast forward in 10s increments, play/pause, and mute/unmute the audio/video. The video controller is my most used bookmarklet when watching videos.
 
-@vid-toggle-ctrl.js
+Note: Due to the use of `innerHTML`, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
-#### Change video playback speed
-
-Changes the first video's playback speed, should work with youtube/vimeo and etc, also shows the current playback speed.
-
-@vid-speed.js
-
-#### Change all videos playback speed
-
-Useful if there are multiple videos in a single page, changes the playback speed for all videos.
-
-@vid-speed-all.js
-
-#### Play/pause video
-
-Able to play/pause the first video, useful if video controls are hidden but recommend to use the video controller bookmarklet instead.
-
-@vid-play-pause.js
-
-## Audio-related bookmarklets
-
-A collection of audio-related bookmarklets, works as long as the website uses audio tags. Applies to the first audio on the website, won't work for audios inside an iframe.
-
-If you want to apply to a audio inside an iframe, use the iframe bookmarklet below to open the audio iframe in a new tab, then try the audio bookmarklet.
-
-Note: Repurposed from the video bookmarklets.
-
-#### Audio Controller
-
-Creates a small audio playback controller fixed to the top right side of the screen, click the bookmarklet again to remove. Note that the controller buttons will be affected by the website's existing CSS.
-
-Able to change playback speed, restart the audio, rewind or fast forward in 10s increments, play/pause, and mute/unmute the audio.
-
-Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
-
+Audio:
 @aud-controller.js
 
-#### Toggles default HTML5 audio controls
+Video:
+@vid-controller.js
 
-Toggles the default HTML5 audio controls and remove all controlsList attributes.
+#### Toggles default HTML5 audio/video controls
 
+Toggles the default HTML5 audio/video controls and remove all `controlsList` attributes.
+
+Audio:
 @aud-toggle-ctrl.js
 
-#### Change audio playback speed
+Video:
+@vid-toggle-ctrl.js
 
-Changes the first audio's playback speed, also shows the current playback speed.
+#### Change audio/video playback speed
 
+Changes the first audio/video's playback speed, should work with youtube/vimeo and etc, also shows the current playback speed.
+
+Audio:
 @aud-speed.js
 
-#### Change all audios playback speed
+Video:
+@vid-speed.js
 
-Useful if there are multiple audios in a single page, changes the playback speed for all audios.
+#### Change all audios/videos playback speed
 
+Useful if there are multiple audios/videos in a single page, changes the playback speed for all audios/videos.
+
+Audio:
 @aud-speed-all.js
 
-#### Play/pause audio
+Video:
+@vid-speed-all.js
 
-Able to play/pause the first audio, useful if audio controls are hidden but recommend to use the audio controller bookmarklet instead.
+#### Play/pause audio or audio/video
 
+Able to play/pause the first audio/video, useful if audio/video controls are hidden but recommend to use the audio/video controller bookmarklet instead.
+
+Audio:
 @aud-play-pause.js
+
+Video:
+@vid-play-pause.js
 
 ## Check for iframes and show their source URL
 
@@ -112,7 +98,7 @@ Handy bookmarklet to check for iframes on a website.
 
 Creates a set of buttons showing the iframe's source URL (opens in new tab when clicked) fixed to the top right side of the screen, click the bookmarklet again to remove the buttons. Note that the buttons will be affected by the website's existing CSS.
 
-Note: Due to the use of innerHTML, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
+Note: Due to the use of `innerHTML`, this bookmarklet will not work on sites that require [TrustedHTML](https://developer.mozilla.org/en-US/docs/Web/API/TrustedHTML) assignment (CSP). In such cases, use the other bookmarklets below instead.
 
 @iframe-panel.js
 
@@ -121,24 +107,6 @@ Note: Due to the use of innerHTML, this bookmarklet will not work on sites that 
 Less versatile but works if the above bookmarklet doesn't.
 
 @iframe-alert.js
-
-## Create a simple notepad on the browser
-
-Using html contenteditable to create an empty notepad to jot things down. To save your data, press Ctrl + S or save like a regular webpage, not the ideal but it works.
-
-Alternatively, you could use something like https://browserpad.org/ which saves your data to localStorage instead.
-
-#### Plain text only
-
-```
-data:text/html, <html contenteditable='plaintext-only'>
-```
-
-#### Able to accept html formatting (when copy/paste from other websites)
-
-```
-data:text/html, <html contenteditable>
-```
 
 ## Color sampler bookmarklets
 
@@ -152,41 +120,17 @@ Also converts the HEX code to RGB and HSL values, code for converting RGB to HSL
 
 @color-eyedropper.js
 
-#### New page with color input element
-
-The bookmarklet below is an alternative if the EyeDropper API is not supported, it opens a webpage with a color input element. Note that this replaces the current page you are on, best used on a new tab, click on the input element followed by the eyedropper icon.
-
-```
-data:text/html;charset=utf-8,<input type='color'/>
-```
-
 #### New popup window with color input element
 
-Or alternatively, the bookmarklet below opens a color input element on a new popup window. Referenced from https://css-tricks.com/web-development-bookmarklets/#comment-1795325, lightly modified for readability and to set the popup on the bottom right corner.
+Or alternatively, the bookmarklet below is an alternative if the EyeDropper API is not supported. It opens a color input element on a new popup window. Referenced from https://css-tricks.com/web-development-bookmarklets/#comment-1795325, lightly modified for readability and to set the popup on the bottom right corner.
 
 @color-popup.js
-
-## Slightly improve website readability
-
-Simple bookmarklet to center the webpage, limit the width, and change the line height. Usually only works on simple websites, might break certain websites.
-
-@simple-center.js
 
 ## Toggle designMode
 
 Toggles [designMode](https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode) to make website editable.
 
 @toggle-designmode.js
-
-## Delete element on click
-
-Deletes an element on click (One time only)
-
-@delete-element-one.js
-
-Deletes an element on click (Active until page reload or Esc key pressed, able to undo using Ctrl + Z or Cmd + Z)
-
-@delete-element.js
 
 ## Check website data
 
@@ -202,7 +146,31 @@ Reads and displays your sessionStorage data.
 
 @show-sessionstorage.js
 
-## Bookmarklet by others that I found useful
+## Slightly improve website readability
+
+Simple bookmarklet to center the webpage, limit the width, and change the line height. Usually only works on simple websites, might break certain websites.
+
+@simple-center.js
+
+## Create a simple notepad on the browser
+
+Using html contenteditable to create an empty notepad to jot things down. To save your data, press Ctrl + S or save like a regular webpage, not the ideal but it works. Technically not a bookmarklet but a [data URL](https://developer.mozilla.org/en-US/docs/web/http/basics_of_http/data_urls) instead.
+
+Alternatively, you could use something like https://browserpad.org/ which saves your data to localStorage instead.
+
+#### Plain text only
+
+```
+data:text/html, <html contenteditable='plaintext-only'>
+```
+
+#### Able to accept html formatting (when copy/paste from other websites)
+
+```
+data:text/html, <html contenteditable>
+```
+
+## Bookmarklets by others that I found useful
 
 #### Kill Sticky
 
@@ -234,7 +202,7 @@ https://gist.github.com/caseywatts/c0cec1f89ccdb8b469b1
 
 https://make-bookmarklets.com/
 
-## Contributing
+## How to contribute
 
 If you would like to contribute to this project, feel free to:
 

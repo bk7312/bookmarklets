@@ -1,9 +1,9 @@
 javascript: (() => {
   let mouseX = 0;
   let mouseY = 0;
-  const getEl = (e) => {
-    const tags = document.querySelectorAll(e.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(e);
+  const getEl = (el) => {
+    const tags = document.querySelectorAll(el.tagName.toLowerCase());
+    const idx = Array.from(tags).indexOf(el);
     return idx === -1 ? null : tags[idx];
   };
   const handleMouseover = (e) => {
@@ -21,10 +21,12 @@ javascript: (() => {
     }
   };
   const unmount = () => {
+    document.elementFromPoint(mouseX, mouseY).style.outline = '';
     document.body.removeEventListener('click', handleClick);
     document.body.removeEventListener('mouseover', handleMouseover);
     document.body.removeEventListener('mouseout', handleMouseout);
-    document.body.removeEventListener('keydown', handleEsc);
+    document.body.removeEventListener('keydown', handleKeydown);
+    document.body.removeEventListener('contextmenu', handleContextmenu);
   };
   const handleClick = (e) => {
     e.preventDefault();
@@ -34,15 +36,19 @@ javascript: (() => {
       unmount();
     }
   };
-  const handleEsc = (e) => {
+  const handleKeydown = (e) => {
     if (e.key === 'Escape') {
       e.preventDefault();
-      document.elementFromPoint(mouseX, mouseY).style.outline = '';
       unmount();
     }
+  };
+  const handleContextmenu = (e) => {
+    e.preventDefault();
+    unmount();
   };
   document.body.addEventListener('click', handleClick);
   document.body.addEventListener('mouseover', handleMouseover);
   document.body.addEventListener('mouseout', handleMouseout);
-  document.body.addEventListener('keydown', handleEsc);
+  document.body.addEventListener('keydown', handleKeydown);
+  document.body.addEventListener('contextmenu', handleContextmenu);
 })();
