@@ -11,6 +11,10 @@ pre {
   overflow-x: auto;
 }
 
+img {
+  max-width: 100%;
+}
+
 .btn {
   text-decoration: none;
   color: white;
