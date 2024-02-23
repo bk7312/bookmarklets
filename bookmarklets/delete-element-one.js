@@ -2,12 +2,12 @@ javascript: (() => {
   let mouseX = 0;
   let mouseY = 0;
   const getEl = (e) => {
-    const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(e.target);
+    const tags = document.querySelectorAll(e.tagName.toLowerCase());
+    const idx = Array.from(tags).indexOf(e);
     return idx === -1 ? null : tags[idx];
   };
   const handleMouseover = (e) => {
-    const el = getEl(e);
+    const el = getEl(e.target);
     mouseX = e.clientX;
     mouseY = e.clientY;
     if (el) {
@@ -15,7 +15,7 @@ javascript: (() => {
     }
   };
   const handleMouseout = (e) => {
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
       el.style.outline = '';
     }
@@ -28,7 +28,7 @@ javascript: (() => {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
       el.remove();
       unmount();

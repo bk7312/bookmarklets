@@ -6,9 +6,13 @@ html {
 }
 
 pre {
-  background-color: #eee;
   padding: 1em;
   overflow-x: auto;
+}
+
+pre,
+code {
+  background-color: #eee;
 }
 
 img {
@@ -32,12 +36,16 @@ img {
     background-color: #333;
     color: #eee;
   }
-  pre {
+
+  pre,
+  code {
     background-color: #555;
   }
+
   a {
     color: #39f;
   }
+
   a:visited {
     color: #b7b;
   }

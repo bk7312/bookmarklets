@@ -1,4 +1,4 @@
-# Collection of bookmarklets
+# A collection of bookmarklets
 
 Here are some of the bookmarklets I've created or collected over the years for my personal use.
 
@@ -8,7 +8,7 @@ What are [bookmarklets](https://en.wikipedia.org/wiki/Bookmarklet)? They are bas
 
 To install a bookmarklet, create a new bookmark and paste the code into the URL bar. See examples below, images taken from [freeCodeCamp](https://www.freecodecamp.org/news/what-are-bookmarklets/).
 
-Alternatively, if the bookmarklet is available as a link, you can also drag and drop to your bookmarks to install.
+Alternatively, if the bookmarklet is available as a link (if you're reading this from the website), you can also drag and drop it to your bookmarks menu to install. Note that the JS code in the bookmarklet link might be different as it has been minified.
 
 **Only install bookmarklets from sources you trust and whenever possible, review the code before running it!**
 
@@ -543,18 +543,18 @@ javascript: (() => {
 
 Deletes an element on click (One time only)
 
-<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const getEl=e=&#x3E;{var tags=document.querySelectorAll(e.target.tagName.toLowerCase()),e=Array.from(tags).indexOf(e.target);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},unmount=()=&#x3E;{document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc)},handleClick=e=&#x3E;{e.preventDefault();e=getEl(e);e&#x26;&#x26;(e.remove(),unmount())},handleEsc=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,unmount())};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element-one.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const getEl=e=&#x3E;{var tags=document.querySelectorAll(e.tagName.toLowerCase()),e=Array.from(tags).indexOf(e);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e.target);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e.target);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},unmount=()=&#x3E;{document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc)},handleClick=e=&#x3E;{e.preventDefault();e=getEl(e.target);e&#x26;&#x26;(e.remove(),unmount())},handleEsc=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,unmount())};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element-one.js</a>
 ```
 javascript: (() => {
   let mouseX = 0;
   let mouseY = 0;
   const getEl = (e) => {
-    const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(e.target);
+    const tags = document.querySelectorAll(e.tagName.toLowerCase());
+    const idx = Array.from(tags).indexOf(e);
     return idx === -1 ? null : tags[idx];
   };
   const handleMouseover = (e) => {
-    const el = getEl(e);
+    const el = getEl(e.target);
     mouseX = e.clientX;
     mouseY = e.clientY;
     if (el) {
@@ -562,7 +562,7 @@ javascript: (() => {
     }
   };
   const handleMouseout = (e) => {
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
       el.style.outline = '';
     }
@@ -575,7 +575,7 @@ javascript: (() => {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
       el.remove();
       unmount();
@@ -596,20 +596,21 @@ javascript: (() => {
 ```
 
 
-Deletes an element on click (Active until page reload or Esc key pressed)
+Deletes an element on click (Active until page reload or Esc key pressed, able to undo using Ctrl + Z or Cmd + Z)
 
-<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const getEl=e=&#x3E;{var tags=document.querySelectorAll(e.target.tagName.toLowerCase()),e=Array.from(tags).indexOf(e.target);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},handleClick=e=&#x3E;{e.preventDefault();e=getEl(e);e&#x26;&#x26;e.remove()},handleEsc=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),void document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc))};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const undo=[],getEl=e=&#x3E;{var tags=document.querySelectorAll(e.tagName.toLowerCase()),e=Array.from(tags).indexOf(e);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e.target);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e.target);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},handleClick=e=&#x3E;{e.preventDefault();var index,e=getEl(e.target);e&#x26;&#x26;(index=Array.from(e.parentElement.children).indexOf(e),undo.push([e,e.parentElement,index]),e.remove())},handleEsc=e=&#x3E;{var index,parent;&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),void document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc)),&#x22;z&#x22;===e.key&#x26;&#x26;(e.ctrlKey||e.metaKey)&#x26;&#x26;0&#x3C;undo.length&#x26;&#x26;([e,parent,index]=undo.pop(),e.style.outline=&#x22;&#x22;,(parent=getEl(parent)).insertBefore(e,parent.children[index]))};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element.js</a>
 ```
 javascript: (() => {
   let mouseX = 0;
   let mouseY = 0;
+  const undo = [];
   const getEl = (e) => {
-    const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(e.target);
+    const tags = document.querySelectorAll(e.tagName.toLowerCase());
+    const idx = Array.from(tags).indexOf(e);
     return idx === -1 ? null : tags[idx];
   };
   const handleMouseover = (e) => {
-    const el = getEl(e);
+    const el = getEl(e.target);
     mouseX = e.clientX;
     mouseY = e.clientY;
     if (el) {
@@ -617,15 +618,17 @@ javascript: (() => {
     }
   };
   const handleMouseout = (e) => {
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
       el.style.outline = '';
     }
   };
   const handleClick = (e) => {
     e.preventDefault();
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
+      const index = Array.from(el.parentElement.children).indexOf(el);
+      undo.push([el, el.parentElement, index]);
       el.remove();
     }
   };
@@ -640,6 +643,12 @@ javascript: (() => {
       e.preventDefault();
       document.elementFromPoint(mouseX, mouseY).style.outline = '';
       unmount();
+    }
+    if (e.key === 'z' && (e.ctrlKey || e.metaKey) && undo.length > 0) {
+      const [el, parent, index] = undo.pop();
+      el.style.outline = '';
+      const parentEl = getEl(parent);
+      parentEl.insertBefore(el, parentEl.children[index]);
     }
   };
   document.body.addEventListener('click', handleClick);
@@ -751,4 +760,19 @@ https://www.freecodecamp.org/news/what-are-bookmarklets/
 https://gist.github.com/caseywatts/c0cec1f89ccdb8b469b1
 
 https://make-bookmarklets.com/
+
+## Contributing
+
+If you would like to contribute to this project, feel free to:
+
+1. [Raise an issue](https://github.com/bk7312/bookmarklets/issues) - Let me know if there's any bugs or bookmarklet request and I'll see what I can do.
+2. [Create a pull request](https://github.com/bk7312/bookmarklets/pulls) - If you want to get your hands dirty and fix/improve/add a new bookmarklet yourself, feel free to fork this repo and create a PR.
+
+How to add a new bookmarklet to this repo:
+
+1. Fork or clone this repo and run `npm i` to install the required package, make sure you already have node.js installed.
+2. Create a new `bookmarklets/bookmarklet-name.js` script for the bookmarklet you want to add.
+3. Update `template/readme_template.md` to include a description and add `@bookmarklet-name.js` on a new line after your description.
+4. Run `npm run build` to generate the updated `README.md` and `index.html` with the new bookmarklet.
+5. Create a PR.
 

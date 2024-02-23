@@ -27,12 +27,12 @@
   </head>
 
   <body>
-    <h1>Collection of bookmarklets</h1>
+    <h1>A collection of bookmarklets</h1>
 <p>Here are some of the bookmarklets I&#39;ve created or collected over the years for my personal use.</p>
 <p>What are <a href="https://en.wikipedia.org/wiki/Bookmarklet">bookmarklets</a>? They are basically bookmarks that execute javascript code when clicked instead of opening a website. Bookmarklets give you the power of javascript to do whatever you want (within the limits of your browser), so use it with care and only use bookmarklets you trust!</p>
 <h2>How to install and use bookmarklets</h2>
 <p>To install a bookmarklet, create a new bookmark and paste the code into the URL bar. See examples below, images taken from <a href="https://www.freecodecamp.org/news/what-are-bookmarklets/">freeCodeCamp</a>.</p>
-<p>Alternatively, if the bookmarklet is available as a link, you can also drag and drop to your bookmarks to install.</p>
+<p>Alternatively, if the bookmarklet is available as a link (if you&#39;re reading this from the website), you can also drag and drop it to your bookmarks menu to install. Note that the JS code in the bookmarklet link might be different as it has been minified.</p>
 <p><strong>Only install bookmarklets from sources you trust and whenever possible, review the code before running it!</strong></p>
 <h4>Example using Firefox:</h4>
 <p><img src="https://github.com/bk7312/bookmarklets/assets/14029543/db38cfc8-145d-4fb0-8395-2a06cbc76723" alt="firefox-1"></p>
@@ -448,17 +448,17 @@
 </code></pre>
 <h2>Delete element on click</h2>
 <p>Deletes an element on click (One time only)</p>
-<p><a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const getEl=e=&#x3E;{var tags=document.querySelectorAll(e.target.tagName.toLowerCase()),e=Array.from(tags).indexOf(e.target);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},unmount=()=&#x3E;{document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc)},handleClick=e=&#x3E;{e.preventDefault();e=getEl(e);e&#x26;&#x26;(e.remove(),unmount())},handleEsc=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,unmount())};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element-one.js</a></p>
+<p><a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const getEl=e=&#x3E;{var tags=document.querySelectorAll(e.tagName.toLowerCase()),e=Array.from(tags).indexOf(e);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e.target);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e.target);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},unmount=()=&#x3E;{document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc)},handleClick=e=&#x3E;{e.preventDefault();e=getEl(e.target);e&#x26;&#x26;(e.remove(),unmount())},handleEsc=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,unmount())};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element-one.js</a></p>
 <pre><code>javascript: (() =&gt; {
   let mouseX = 0;
   let mouseY = 0;
   const getEl = (e) =&gt; {
-    const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(e.target);
+    const tags = document.querySelectorAll(e.tagName.toLowerCase());
+    const idx = Array.from(tags).indexOf(e);
     return idx === -1 ? null : tags[idx];
   };
   const handleMouseover = (e) =&gt; {
-    const el = getEl(e);
+    const el = getEl(e.target);
     mouseX = e.clientX;
     mouseY = e.clientY;
     if (el) {
@@ -466,7 +466,7 @@
     }
   };
   const handleMouseout = (e) =&gt; {
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
       el.style.outline = &#39;&#39;;
     }
@@ -479,7 +479,7 @@
   };
   const handleClick = (e) =&gt; {
     e.preventDefault();
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
       el.remove();
       unmount();
@@ -498,18 +498,19 @@
   document.body.addEventListener(&#39;keydown&#39;, handleEsc);
 })();
 </code></pre>
-<p>Deletes an element on click (Active until page reload or Esc key pressed)</p>
-<p><a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const getEl=e=&#x3E;{var tags=document.querySelectorAll(e.target.tagName.toLowerCase()),e=Array.from(tags).indexOf(e.target);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},handleClick=e=&#x3E;{e.preventDefault();e=getEl(e);e&#x26;&#x26;e.remove()},handleEsc=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),void document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc))};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element.js</a></p>
+<p>Deletes an element on click (Active until page reload or Esc key pressed, able to undo using Ctrl + Z or Cmd + Z)</p>
+<p><a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const undo=[],getEl=e=&#x3E;{var tags=document.querySelectorAll(e.tagName.toLowerCase()),e=Array.from(tags).indexOf(e);return-1===e?null:tags[e]},handleMouseover=e=&#x3E;{var el=getEl(e.target);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e.target);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},handleClick=e=&#x3E;{e.preventDefault();var index,e=getEl(e.target);e&#x26;&#x26;(index=Array.from(e.parentElement.children).indexOf(e),undo.push([e,e.parentElement,index]),e.remove())},handleEsc=e=&#x3E;{var index,parent;&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),void document.body.removeEventListener(&#x22;keydown&#x22;,handleEsc)),&#x22;z&#x22;===e.key&#x26;&#x26;(e.ctrlKey||e.metaKey)&#x26;&#x26;0&#x3C;undo.length&#x26;&#x26;([e,parent,index]=undo.pop(),e.style.outline=&#x22;&#x22;,(parent=getEl(parent)).insertBefore(e,parent.children[index]))};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleEsc)})();" title="To install, drag and drop this link to your bookmarks">delete-element.js</a></p>
 <pre><code>javascript: (() =&gt; {
   let mouseX = 0;
   let mouseY = 0;
+  const undo = [];
   const getEl = (e) =&gt; {
-    const tags = document.querySelectorAll(e.target.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(e.target);
+    const tags = document.querySelectorAll(e.tagName.toLowerCase());
+    const idx = Array.from(tags).indexOf(e);
     return idx === -1 ? null : tags[idx];
   };
   const handleMouseover = (e) =&gt; {
-    const el = getEl(e);
+    const el = getEl(e.target);
     mouseX = e.clientX;
     mouseY = e.clientY;
     if (el) {
@@ -517,15 +518,17 @@
     }
   };
   const handleMouseout = (e) =&gt; {
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
       el.style.outline = &#39;&#39;;
     }
   };
   const handleClick = (e) =&gt; {
     e.preventDefault();
-    const el = getEl(e);
+    const el = getEl(e.target);
     if (el) {
+      const index = Array.from(el.parentElement.children).indexOf(el);
+      undo.push([el, el.parentElement, index]);
       el.remove();
     }
   };
@@ -540,6 +543,12 @@
       e.preventDefault();
       document.elementFromPoint(mouseX, mouseY).style.outline = &#39;&#39;;
       unmount();
+    }
+    if (e.key === &#39;z&#39; &amp;&amp; (e.ctrlKey || e.metaKey) &amp;&amp; undo.length &gt; 0) {
+      const [el, parent, index] = undo.pop();
+      el.style.outline = &#39;&#39;;
+      const parentEl = getEl(parent);
+      parentEl.insertBefore(el, parentEl.children[index]);
     }
   };
   document.body.addEventListener(&#39;click&#39;, handleClick);
@@ -619,6 +628,20 @@
 <p><a href="https://www.freecodecamp.org/news/what-are-bookmarklets/">https://www.freecodecamp.org/news/what-are-bookmarklets/</a></p>
 <p><a href="https://gist.github.com/caseywatts/c0cec1f89ccdb8b469b1">https://gist.github.com/caseywatts/c0cec1f89ccdb8b469b1</a></p>
 <p><a href="https://make-bookmarklets.com/">https://make-bookmarklets.com/</a></p>
+<h2>Contributing</h2>
+<p>If you would like to contribute to this project, feel free to:</p>
+<ol>
+<li><a href="https://github.com/bk7312/bookmarklets/issues">Raise an issue</a> - Let me know if there&#39;s any bugs or bookmarklet request and I&#39;ll see what I can do.</li>
+<li><a href="https://github.com/bk7312/bookmarklets/pulls">Create a pull request</a> - If you want to get your hands dirty and fix/improve/add a new bookmarklet yourself, feel free to fork this repo and create a PR.</li>
+</ol>
+<p>How to add a new bookmarklet to this repo:</p>
+<ol>
+<li>Fork or clone this repo and run <code>npm i</code> to install the required package, make sure you already have node.js installed.</li>
+<li>Create a new <code>bookmarklets/bookmarklet-name.js</code> script for the bookmarklet you want to add.</li>
+<li>Update <code>template/readme_template.md</code> to include a description and add <code>@bookmarklet-name.js</code> on a new line after your description.</li>
+<li>Run <code>npm run build</code> to generate the updated <code>README.md</code> and <code>index.html</code> with the new bookmarklet.</li>
+<li>Create a PR.</li>
+</ol>
 
   </body>
 </html>

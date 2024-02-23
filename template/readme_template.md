@@ -1,4 +1,4 @@
-# Collection of bookmarklets
+# A collection of bookmarklets
 
 Here are some of the bookmarklets I've created or collected over the years for my personal use.
 
@@ -8,7 +8,7 @@ What are [bookmarklets](https://en.wikipedia.org/wiki/Bookmarklet)? They are bas
 
 To install a bookmarklet, create a new bookmark and paste the code into the URL bar. See examples below, images taken from [freeCodeCamp](https://www.freecodecamp.org/news/what-are-bookmarklets/).
 
-Alternatively, if the bookmarklet is available as a link, you can also drag and drop to your bookmarks to install.
+Alternatively, if the bookmarklet is available as a link (if you're reading this from the website), you can also drag and drop it to your bookmarks menu to install. Note that the JS code in the bookmarklet link might be different as it has been minified.
 
 **Only install bookmarklets from sources you trust and whenever possible, review the code before running it!**
 
@@ -184,7 +184,7 @@ Deletes an element on click (One time only)
 
 @delete-element-one.js
 
-Deletes an element on click (Active until page reload or Esc key pressed)
+Deletes an element on click (Active until page reload or Esc key pressed, able to undo using Ctrl + Z or Cmd + Z)
 
 @delete-element.js
 
@@ -233,3 +233,18 @@ https://www.freecodecamp.org/news/what-are-bookmarklets/
 https://gist.github.com/caseywatts/c0cec1f89ccdb8b469b1
 
 https://make-bookmarklets.com/
+
+## Contributing
+
+If you would like to contribute to this project, feel free to:
+
+1. [Raise an issue](https://github.com/bk7312/bookmarklets/issues) - Let me know if there's any bugs or bookmarklet request and I'll see what I can do.
+2. [Create a pull request](https://github.com/bk7312/bookmarklets/pulls) - If you want to get your hands dirty and fix/improve/add a new bookmarklet yourself, feel free to fork this repo and create a PR.
+
+How to add a new bookmarklet to this repo:
+
+1. Fork or clone this repo and run `npm i` to install the required package, make sure you already have node.js installed.
+2. Create a new `bookmarklets/bookmarklet-name.js` script for the bookmarklet you want to add.
+3. Update `template/readme_template.md` to include a description and add `@bookmarklet-name.js` on a new line after your description.
+4. Run `npm run build` to generate the updated `README.md` and `index.html` with the new bookmarklet.
+5. Create a PR.
