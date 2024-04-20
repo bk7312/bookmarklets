@@ -1,24 +1,13 @@
 javascript: (() => {
   let mouseX = 0;
   let mouseY = 0;
-  const getEl = (el) => {
-    const tags = document.querySelectorAll(el.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(el);
-    return idx === -1 ? null : tags[idx];
-  };
   const handleMouseover = (e) => {
-    const el = getEl(e.target);
     mouseX = e.clientX;
     mouseY = e.clientY;
-    if (el) {
-      el.style.outline = 'dashed';
-    }
+    e.target.style.outline = 'dashed';
   };
   const handleMouseout = (e) => {
-    const el = getEl(e.target);
-    if (el) {
-      el.style.outline = '';
-    }
+    e.target.style.outline = '';
   };
   const unmount = () => {
     document.elementFromPoint(mouseX, mouseY).style.outline = '';
@@ -30,11 +19,8 @@ javascript: (() => {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    const el = getEl(e.target);
-    if (el) {
-      el.remove();
-      unmount();
-    }
+    e.target.remove();
+    unmount();
   };
   const handleKeydown = (e) => {
     if (e.key === 'Escape') {

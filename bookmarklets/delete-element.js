@@ -2,33 +2,20 @@ javascript: (() => {
   let mouseX = 0;
   let mouseY = 0;
   const undo = [];
-  const getEl = (el) => {
-    const tags = document.querySelectorAll(el.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(el);
-    return idx === -1 ? null : tags[idx];
-  };
   const handleMouseover = (e) => {
-    const el = getEl(e.target);
     mouseX = e.clientX;
     mouseY = e.clientY;
-    if (el) {
-      el.style.outline = 'dashed';
-    }
+    e.target.style.outline = 'dashed';
   };
   const handleMouseout = (e) => {
-    const el = getEl(e.target);
-    if (el) {
-      el.style.outline = '';
-    }
+    e.target.style.outline = '';
   };
   const handleClick = (e) => {
     e.preventDefault();
-    const el = getEl(e.target);
-    if (el) {
-      const index = Array.from(el.parentElement.children).indexOf(el);
-      undo.push([el, el.parentElement, index]);
-      el.remove();
-    }
+    const el = e.target;
+    const index = Array.from(el.parentElement.children).indexOf(el);
+    undo.push([el, el.parentElement, index]);
+    el.remove();
   };
   const unmount = () => {
     document.elementFromPoint(mouseX, mouseY).style.outline = '';
@@ -44,9 +31,8 @@ javascript: (() => {
       unmount();
     }
     if (e.key === 'z' && (e.ctrlKey || e.metaKey) && undo.length > 0) {
-      const [el, parent, index] = undo.pop();
+      const [el, parentEl, index] = undo.pop();
       el.style.outline = '';
-      const parentEl = getEl(parent);
       parentEl.insertBefore(el, parentEl.children[index]);
     }
   };

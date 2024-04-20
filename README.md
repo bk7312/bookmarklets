@@ -24,39 +24,26 @@ Alternatively, if the bookmarklet is available as a link, you can also drag and 
 
 Deletes an element on click. Press the Esc key or right-click to exit, able to undo using Ctrl + Z or Cmd + Z (favorite bookmarklet thus far, fun to play with).
 
-<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const undo=[],getEl=el=&#x3E;{var tags=document.querySelectorAll(el.tagName.toLowerCase()),el=Array.from(tags).indexOf(el);return-1===el?null:tags[el]},handleMouseover=e=&#x3E;{var el=getEl(e.target);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e.target);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},handleClick=e=&#x3E;{e.preventDefault();var index,e=getEl(e.target);e&#x26;&#x26;(index=Array.from(e.parentElement.children).indexOf(e),undo.push([e,e.parentElement,index]),e.remove())},unmount=()=&#x3E;{document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.removeEventListener(&#x22;contextmenu&#x22;,handleContextmenu)},handleKeydown=e=&#x3E;{var index,parent;&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),unmount()),&#x22;z&#x22;===e.key&#x26;&#x26;(e.ctrlKey||e.metaKey)&#x26;&#x26;0&#x3C;undo.length&#x26;&#x26;([e,parent,index]=undo.pop(),e.style.outline=&#x22;&#x22;,(parent=getEl(parent)).insertBefore(e,parent.children[index]))},handleContextmenu=e=&#x3E;{e.preventDefault(),unmount()};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.addEventListener(&#x22;contextmenu&#x22;,handleContextmenu)})();" title="To install, drag and drop this link to your bookmarks">delete-element.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const undo=[],handleMouseover=e=&#x3E;{mouseX=e.clientX,mouseY=e.clientY,e.target.style.outline=&#x22;dashed&#x22;},handleMouseout=e=&#x3E;{e.target.style.outline=&#x22;&#x22;},handleClick=e=&#x3E;{e.preventDefault();var e=e.target,index=Array.from(e.parentElement.children).indexOf(e);undo.push([e,e.parentElement,index]),e.remove()},unmount=()=&#x3E;{document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.removeEventListener(&#x22;contextmenu&#x22;,handleContextmenu)},handleKeydown=e=&#x3E;{var parentEl,index;&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),unmount()),&#x22;z&#x22;===e.key&#x26;&#x26;(e.ctrlKey||e.metaKey)&#x26;&#x26;0&#x3C;undo.length&#x26;&#x26;([e,parentEl,index]=undo.pop(),e.style.outline=&#x22;&#x22;,parentEl.insertBefore(e,parentEl.children[index]))},handleContextmenu=e=&#x3E;{e.preventDefault(),unmount()};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.addEventListener(&#x22;contextmenu&#x22;,handleContextmenu)})();" title="To install, drag and drop this link to your bookmarks">delete-element.js</a>
 ```
 javascript: (() => {
   let mouseX = 0;
   let mouseY = 0;
   const undo = [];
-  const getEl = (el) => {
-    const tags = document.querySelectorAll(el.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(el);
-    return idx === -1 ? null : tags[idx];
-  };
   const handleMouseover = (e) => {
-    const el = getEl(e.target);
     mouseX = e.clientX;
     mouseY = e.clientY;
-    if (el) {
-      el.style.outline = 'dashed';
-    }
+    e.target.style.outline = 'dashed';
   };
   const handleMouseout = (e) => {
-    const el = getEl(e.target);
-    if (el) {
-      el.style.outline = '';
-    }
+    e.target.style.outline = '';
   };
   const handleClick = (e) => {
     e.preventDefault();
-    const el = getEl(e.target);
-    if (el) {
-      const index = Array.from(el.parentElement.children).indexOf(el);
-      undo.push([el, el.parentElement, index]);
-      el.remove();
-    }
+    const el = e.target;
+    const index = Array.from(el.parentElement.children).indexOf(el);
+    undo.push([el, el.parentElement, index]);
+    el.remove();
   };
   const unmount = () => {
     document.elementFromPoint(mouseX, mouseY).style.outline = '';
@@ -72,9 +59,8 @@ javascript: (() => {
       unmount();
     }
     if (e.key === 'z' && (e.ctrlKey || e.metaKey) && undo.length > 0) {
-      const [el, parent, index] = undo.pop();
+      const [el, parentEl, index] = undo.pop();
       el.style.outline = '';
-      const parentEl = getEl(parent);
       parentEl.insertBefore(el, parentEl.children[index]);
     }
   };
@@ -93,29 +79,18 @@ javascript: (() => {
 
 Deletes an element on click, one time only, no undo. Press the Esc key or right-click to cancel.
 
-<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const getEl=el=&#x3E;{var tags=document.querySelectorAll(el.tagName.toLowerCase()),el=Array.from(tags).indexOf(el);return-1===el?null:tags[el]},handleMouseover=e=&#x3E;{var el=getEl(e.target);mouseX=e.clientX,mouseY=e.clientY,el&#x26;&#x26;(el.style.outline=&#x22;dashed&#x22;)},handleMouseout=e=&#x3E;{e=getEl(e.target);e&#x26;&#x26;(e.style.outline=&#x22;&#x22;)},unmount=()=&#x3E;{document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.removeEventListener(&#x22;contextmenu&#x22;,handleContextmenu)},handleClick=e=&#x3E;{e.preventDefault();e=getEl(e.target);e&#x26;&#x26;(e.remove(),unmount())},handleKeydown=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),unmount())},handleContextmenu=e=&#x3E;{e.preventDefault(),unmount()};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.addEventListener(&#x22;contextmenu&#x22;,handleContextmenu)})();" title="To install, drag and drop this link to your bookmarks">delete-element-one.js</a>
+<a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const handleMouseover=e=&#x3E;{mouseX=e.clientX,mouseY=e.clientY,e.target.style.outline=&#x22;dashed&#x22;},handleMouseout=e=&#x3E;{e.target.style.outline=&#x22;&#x22;},unmount=()=&#x3E;{document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.removeEventListener(&#x22;contextmenu&#x22;,handleContextmenu)},handleClick=e=&#x3E;{e.preventDefault(),e.target.remove(),unmount()},handleKeydown=e=&#x3E;{&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),unmount())},handleContextmenu=e=&#x3E;{e.preventDefault(),unmount()};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.addEventListener(&#x22;contextmenu&#x22;,handleContextmenu)})();" title="To install, drag and drop this link to your bookmarks">delete-element-one.js</a>
 ```
 javascript: (() => {
   let mouseX = 0;
   let mouseY = 0;
-  const getEl = (el) => {
-    const tags = document.querySelectorAll(el.tagName.toLowerCase());
-    const idx = Array.from(tags).indexOf(el);
-    return idx === -1 ? null : tags[idx];
-  };
   const handleMouseover = (e) => {
-    const el = getEl(e.target);
     mouseX = e.clientX;
     mouseY = e.clientY;
-    if (el) {
-      el.style.outline = 'dashed';
-    }
+    e.target.style.outline = 'dashed';
   };
   const handleMouseout = (e) => {
-    const el = getEl(e.target);
-    if (el) {
-      el.style.outline = '';
-    }
+    e.target.style.outline = '';
   };
   const unmount = () => {
     document.elementFromPoint(mouseX, mouseY).style.outline = '';
@@ -127,11 +102,8 @@ javascript: (() => {
   };
   const handleClick = (e) => {
     e.preventDefault();
-    const el = getEl(e.target);
-    if (el) {
-      el.remove();
-      unmount();
-    }
+    e.target.remove();
+    unmount();
   };
   const handleKeydown = (e) => {
     if (e.key === 'Escape') {
