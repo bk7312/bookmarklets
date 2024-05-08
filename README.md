@@ -24,6 +24,8 @@ Alternatively, if the bookmarklet is available as a link, you can also drag and 
 
 Deletes an element on click. Press the Esc key or right-click to exit, able to undo using Ctrl + Z or Cmd + Z (favorite bookmarklet thus far, fun to play with).
 
+Thinking of adding some new fun features in the future, or maybe turn it into a browser extension.
+
 <a class='btn' href="javascript:(()=&#x3E;{let mouseX=0,mouseY=0;const undo=[],handleMouseover=e=&#x3E;{mouseX=e.clientX,mouseY=e.clientY,e.target.style.outline=&#x22;dashed&#x22;},handleMouseout=e=&#x3E;{e.target.style.outline=&#x22;&#x22;},handleClick=e=&#x3E;{e.preventDefault();var e=e.target,index=Array.from(e.parentElement.children).indexOf(e);undo.push([e,e.parentElement,index]),e.remove()},unmount=()=&#x3E;{document.elementFromPoint(mouseX,mouseY).style.outline=&#x22;&#x22;,document.body.removeEventListener(&#x22;click&#x22;,handleClick),document.body.removeEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.removeEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.removeEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.removeEventListener(&#x22;contextmenu&#x22;,handleContextmenu)},handleKeydown=e=&#x3E;{var parentEl,index;&#x22;Escape&#x22;===e.key&#x26;&#x26;(e.preventDefault(),unmount()),&#x22;z&#x22;===e.key&#x26;&#x26;(e.ctrlKey||e.metaKey)&#x26;&#x26;0&#x3C;undo.length&#x26;&#x26;([e,parentEl,index]=undo.pop(),e.style.outline=&#x22;&#x22;,parentEl.insertBefore(e,parentEl.children[index]))},handleContextmenu=e=&#x3E;{e.preventDefault(),unmount()};document.body.addEventListener(&#x22;click&#x22;,handleClick),document.body.addEventListener(&#x22;mouseover&#x22;,handleMouseover),document.body.addEventListener(&#x22;mouseout&#x22;,handleMouseout),document.body.addEventListener(&#x22;keydown&#x22;,handleKeydown),document.body.addEventListener(&#x22;contextmenu&#x22;,handleContextmenu)})();" title="To install, drag and drop this link to your bookmarks">delete-element.js</a>
 ```
 javascript: (() => {
@@ -124,11 +126,48 @@ javascript: (() => {
 ```
 
 
+## Remove CSS, image, and other media from a webpage
+
+Ever want to remove all the CSS and images/videos/etc on a webpage? Well now you can with this amazing new bookmarklet! Removes img/svg/iframe/audio/video/canvas.
+
+Why would you ever want to do that? Well, you can browse flashy websites without attracting the attention of others walking by (my current use case), and you can use it to see a before/after comparison of the website/webapp with and without CSS applied.
+
+<a class='btn' href="javascript:document.querySelectorAll(&#x22;img&#x22;).forEach(el=&#x3E;{el.replaceWith(&#x22;img_alt: &#x22;+el.alt)}),document.querySelectorAll(&#x22;svg&#x22;).forEach(el=&#x3E;{el.replaceWith(&#x22;svg_title: &#x22;+(el.querySelector(&#x22;title&#x22;)?.textContent??&#x22;&#x22;))}),document.querySelectorAll(&#x22;iframe, audio, video&#x22;).forEach(el=&#x3E;el.replaceWith(el.tagName.toLowerCase()+&#x22;_src: &#x22;+el.src)),document.querySelectorAll(&#x22;canvas&#x22;).forEach(el=&#x3E;el.replaceWith(&#x60;canvas_WxH: ${el.width}x&#x60;+el.height)),document.querySelectorAll(&#x22;[style]&#x22;).forEach(el=&#x3E;el.removeAttribute(&#x22;style&#x22;)),void document.querySelectorAll(&#x27;style, link[rel=&#x22;stylesheet&#x22;]&#x27;).forEach(el=&#x3E;el.remove());" title="To install, drag and drop this link to your bookmarks">remove-css-media.js</a>
+```
+javascript: (() => {
+  document.querySelectorAll('img').forEach((el) => {
+    el.replaceWith(`img_alt: ${el.alt}`);
+  });
+  document.querySelectorAll('svg').forEach((el) => {
+    el.replaceWith(
+      `svg_title: ${el.querySelector('title')?.textContent ?? ''}`
+    );
+  });
+  document
+    .querySelectorAll('iframe, audio, video')
+    .forEach((el) =>
+      el.replaceWith(`${el.tagName.toLowerCase()}_src: ${el.src}`)
+    );
+  document
+    .querySelectorAll('canvas')
+    .forEach((el) => el.replaceWith(`canvas_WxH: ${el.width}x${el.height}`));
+  document
+    .querySelectorAll('[style]')
+    .forEach((el) => el.removeAttribute('style'));
+  document
+    .querySelectorAll('style, link[rel="stylesheet"]')
+    .forEach((el) => el.remove());
+})();
+```
+
+
 ## Audio/Video-related bookmarklets
 
 A collection of audio/video-related bookmarklets, works as long as the website uses audio/video tags. Applies to the first audio/video on the website, won't work for audios/videos inside an iframe.
 
 Note: If you want to apply to a audio/video inside an iframe, use the iframe bookmarklet below to open the audio/video iframe in a new tab, then try the audio/video bookmarklet.
+
+I was thinking of turning this into a browser extension to fix the iframe issue (see note above) but ended up using [this extension](https://github.com/igrigorik/videospeed) instead. Thinking of forking it and making my own version sometime.
 
 #### Audio/Video Controller
 

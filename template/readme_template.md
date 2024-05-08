@@ -24,17 +24,29 @@ Alternatively, if the bookmarklet is available as a link, you can also drag and 
 
 Deletes an element on click. Press the Esc key or right-click to exit, able to undo using Ctrl + Z or Cmd + Z (favorite bookmarklet thus far, fun to play with).
 
+Thinking of adding some new fun features in the future, or maybe turn it into a browser extension.
+
 @delete-element.js
 
 Deletes an element on click, one time only, no undo. Press the Esc key or right-click to cancel.
 
 @delete-element-one.js
 
+## Remove CSS, image, and other media from a webpage
+
+Ever want to remove all the CSS and images/videos/etc on a webpage? Well now you can with this amazing new bookmarklet! Removes img/svg/iframe/audio/video/canvas.
+
+Why would you ever want to do that? Well, you can browse flashy websites without attracting the attention of others walking by (my current use case), and you can use it to see a before/after comparison of the website/webapp with and without CSS applied.
+
+@remove-css-media.js
+
 ## Audio/Video-related bookmarklets
 
 A collection of audio/video-related bookmarklets, works as long as the website uses audio/video tags. Applies to the first audio/video on the website, won't work for audios/videos inside an iframe.
 
 Note: If you want to apply to a audio/video inside an iframe, use the iframe bookmarklet below to open the audio/video iframe in a new tab, then try the audio/video bookmarklet.
+
+I was thinking of turning this into a browser extension to fix the iframe issue (see note above) but ended up using [this extension](https://github.com/igrigorik/videospeed) instead. Thinking of forking it and making my own version sometime.
 
 #### Audio/Video Controller
 
