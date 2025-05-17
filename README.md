@@ -8,15 +8,15 @@ What are [bookmarklets](https://en.wikipedia.org/wiki/Bookmarklet)? They are bas
 
 To install a bookmarklet, create a new bookmark and paste the code into the URL bar. See examples below, images taken from [freeCodeCamp](https://www.freecodecamp.org/news/what-are-bookmarklets/).
 
-Alternatively, if the bookmarklet is available as a link, you can also drag and drop it to your bookmarks menu to install. Note that the JS code in the bookmarklet link might be different as it has been minified.
+Alternatively, if the bookmarklet is available as a link, you can also drag and drop it to your bookmarks menu to install. Note that the JS code in the bookmarklet link will be different as it has been minified.
 
 **Only install bookmarklets from sources you trust and whenever possible, review the code before running it!**
 
-#### Example using Firefox:
+### Example using Firefox
 
 ![firefox-1](https://github.com/bk7312/bookmarklets/assets/14029543/db38cfc8-145d-4fb0-8395-2a06cbc76723)
 
-#### Example using Chromium:
+### Example using Chromium
 
 ![chromium](https://github.com/bk7312/bookmarklets/assets/14029543/f53a55f2-ecc0-4a68-8231-e85bad099072)
 
@@ -126,41 +126,6 @@ javascript: (() => {
 ```
 
 
-## Remove CSS, image, and other media from a webpage
-
-Ever want to remove all the CSS and images/videos/etc on a webpage? Well now you can with this amazing new bookmarklet! Removes img/svg/iframe/audio/video/canvas.
-
-Why would you ever want to do that? Well, you can browse flashy websites without attracting the attention of others walking by (my current use case), and you can use it to see a before/after comparison of the website/webapp with and without CSS applied.
-
-<a class='btn' href="javascript:document.querySelectorAll(&#x22;img&#x22;).forEach(el=&#x3E;{el.replaceWith(&#x22;img_alt: &#x22;+el.alt)}),document.querySelectorAll(&#x22;svg&#x22;).forEach(el=&#x3E;{el.replaceWith(&#x22;svg_title: &#x22;+(el.querySelector(&#x22;title&#x22;)?.textContent??&#x22;&#x22;))}),document.querySelectorAll(&#x22;iframe, audio, video&#x22;).forEach(el=&#x3E;el.replaceWith(el.tagName.toLowerCase()+&#x22;_src: &#x22;+el.src)),document.querySelectorAll(&#x22;canvas&#x22;).forEach(el=&#x3E;el.replaceWith(&#x60;canvas_WxH: ${el.width}x&#x60;+el.height)),document.querySelectorAll(&#x22;[style]&#x22;).forEach(el=&#x3E;el.removeAttribute(&#x22;style&#x22;)),void document.querySelectorAll(&#x27;style, link[rel=&#x22;stylesheet&#x22;]&#x27;).forEach(el=&#x3E;el.remove());" title="To install, drag and drop this link to your bookmarks">remove-css-media.js</a>
-```
-javascript: (() => {
-  document.querySelectorAll('img').forEach((el) => {
-    el.replaceWith(`img_alt: ${el.alt}`);
-  });
-  document.querySelectorAll('svg').forEach((el) => {
-    el.replaceWith(
-      `svg_title: ${el.querySelector('title')?.textContent ?? ''}`
-    );
-  });
-  document
-    .querySelectorAll('iframe, audio, video')
-    .forEach((el) =>
-      el.replaceWith(`${el.tagName.toLowerCase()}_src: ${el.src}`)
-    );
-  document
-    .querySelectorAll('canvas')
-    .forEach((el) => el.replaceWith(`canvas_WxH: ${el.width}x${el.height}`));
-  document
-    .querySelectorAll('[style]')
-    .forEach((el) => el.removeAttribute('style'));
-  document
-    .querySelectorAll('style, link[rel="stylesheet"]')
-    .forEach((el) => el.remove());
-})();
-```
-
-
 ## Audio/Video-related bookmarklets
 
 A collection of audio/video-related bookmarklets, works as long as the website uses audio/video tags. Applies to the first audio/video on the website, won't work for audios/videos inside an iframe.
@@ -169,7 +134,7 @@ Note: If you want to apply to a audio/video inside an iframe, use the iframe boo
 
 I was thinking of turning this into a browser extension to fix the iframe issue (see note above) but ended up using [this extension](https://github.com/igrigorik/videospeed) instead. Thinking of forking it and making my own version sometime.
 
-#### Audio/Video Controller
+### Audio/Video Controller
 
 Creates a small audio/video playback controller fixed to the top right side of the screen, click the bookmarklet again to remove. Note that the controller buttons will be affected by the website's existing CSS.
 
@@ -299,7 +264,7 @@ javascript: (() => {
 ```
 
 
-#### Toggles default HTML5 audio/video controls
+### Toggles default HTML5 audio/video controls
 
 Toggles the default HTML5 audio/video controls and remove all `controlsList` attributes.
 
@@ -335,7 +300,7 @@ javascript: (() => {
 ```
 
 
-#### Change audio/video playback speed
+### Change audio/video playback speed
 
 Changes the first audio/video's playback speed, should work with youtube/vimeo and etc, also shows the current playback speed.
 
@@ -367,7 +332,7 @@ javascript: (() => {
 ```
 
 
-#### Change all audios/videos playback speed
+### Change all audios/videos playback speed
 
 Useful if there are multiple audios/videos in a single page, changes the playback speed for all audios/videos.
 
@@ -399,7 +364,7 @@ javascript: (() => {
 ```
 
 
-#### Play/pause audio or audio/video
+### Play/pause audio or audio/video
 
 Able to play/pause the first audio/video, useful if audio/video controls are hidden but recommend to use the audio/video controller bookmarklet instead.
 
@@ -433,7 +398,7 @@ javascript: (() => {
 
 Handy bookmarklet to check for iframes on a website.
 
-#### Show iframes in separate panel
+### Show iframes in separate panel
 
 Creates a set of buttons showing the iframe's source URL (opens in new tab when clicked) fixed to the top right side of the screen, click the bookmarklet again to remove the buttons. Note that the buttons will be affected by the website's existing CSS.
 
@@ -502,7 +467,7 @@ javascript: (() => {
 ```
 
 
-#### Show iframes in an alert dialog
+### Show iframes in an alert dialog
 
 Less versatile but works if the above bookmarklet doesn't.
 
@@ -524,11 +489,11 @@ javascript: (() => {
 
 Some bookmarklets that help with color sampling.
 
-#### Using the EyeDropper API
+### Using the EyeDropper API
 
 Uses the [EyeDropper API](https://developer.mozilla.org/en-US/docs/Web/API/EyeDropper), unfortunately it is not supported in Firefox and Safari at the time of writing (Dec 2023).
 
-Also converts the HEX code to RGB and HSL values, code for converting RGB to HSL referenced from https://www.30secondsofcode.org/js/s/rgb-to-hsl/
+Also converts the HEX code to RGB and HSL values, code for converting RGB to HSL referenced from [30secondsofcode.org](https://www.30secondsofcode.org/js/s/rgb-to-hsl/)
 
 <a class='btn' href="javascript:void(void 0===window.EyeDropper?(alert(&#x22;Your browser doens&#x27;t support the EyeDropper API&#x22;),void 0):(new EyeDropper).open().then(res=&#x3E;{var hex=res.sRGBHex,r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),hex=parseInt(hex.slice(5),16);alert(&#x60;Color is ${res.sRGBHex}, rgb(${r} ${g} ${hex}), hsl(${((r,g,b)=&#x3E;{r/=255,g/=255,b/=255;var l=Math.max(r,g,b),s=l-Math.min(r,g,b),b=0!=s?l===r?(g-b)/s:l===g?2+(b-r)/s:4+(r-g)/s:0;return[(60*b&#x3C;0?60*b+360:60*b).toFixed(2),(100*(s?l&#x3C;=.5?s/(2*l-s):s/(2-(2*l-s)):0)).toFixed(2)+&#x22;%&#x22;,(100*(2*l-s)/2).toFixed(2)+&#x22;%&#x22;]})(r,g,hex).join(&#x22; &#x22;)})&#x60;)}).catch(e=&#x3E;alert(&#x22;Error: &#x22;+e)));" title="To install, drag and drop this link to your bookmarks">color-eyedropper.js</a>
 ```
@@ -579,9 +544,9 @@ javascript: (() => {
 ```
 
 
-#### New popup window with color input element
+### New popup window with color input element
 
-Or alternatively, the bookmarklet below is an alternative if the EyeDropper API is not supported. It opens a color input element on a new popup window. Referenced from https://css-tricks.com/web-development-bookmarklets/#comment-1795325, lightly modified for readability and to set the popup on the bottom right corner.
+Or alternatively, the bookmarklet below is an alternative if the EyeDropper API is not supported. It opens a color input element on a new popup window. Referenced from [css-tricks.com](https://css-tricks.com/web-development-bookmarklets/#comment-1795325), lightly modified for readability and to set the popup on the bottom right corner.
 
 <a class='btn' href="javascript:(()=&#x3E;{var windowFeatures=&#x60;
     popup,
@@ -601,18 +566,6 @@ javascript: (() => {
   `;
   window.open('', '', windowFeatures).document.body.innerHTML =
     '<input type="color">';
-})();
-```
-
-
-## Toggle designMode
-
-Toggles [designMode](https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode) to make website editable.
-
-<a class='btn' href="javascript:void(document.designMode=&#x22;on&#x22;===document.designMode?&#x22;off&#x22;:&#x22;on&#x22;);" title="To install, drag and drop this link to your bookmarks">toggle-designmode.js</a>
-```
-javascript: (() => {
-  document.designMode = document.designMode === 'on' ? 'off' : 'on';
 })();
 ```
 
@@ -661,7 +614,21 @@ javascript: (() => {
 ```
 
 
-## Slightly improve website readability
+## Bookmarklets for modifying websites
+
+### Toggle designMode
+
+Toggles [designMode](https://developer.mozilla.org/en-US/docs/Web/API/Document/designMode) to make website editable.
+
+<a class='btn' href="javascript:void(document.designMode=&#x22;on&#x22;===document.designMode?&#x22;off&#x22;:&#x22;on&#x22;);" title="To install, drag and drop this link to your bookmarks">toggle-designmode.js</a>
+```
+javascript: (() => {
+  document.designMode = document.designMode === 'on' ? 'off' : 'on';
+})();
+```
+
+
+### Slightly improve website readability
 
 Simple bookmarklet to center the webpage, limit the width, and change the line height. Usually only works on simple websites, might break certain websites.
 
@@ -676,31 +643,134 @@ javascript: (() => {
 ```
 
 
+### Make text selectable
+
+Makes the text in every element user selectable.
+
+<a class='btn' href="javascript:void document.querySelectorAll(&#x22;*&#x22;).forEach(el=&#x3E;{el.style.webkitUserSelect=&#x22;text&#x22;,el.style.MozUserSelect=&#x22;text&#x22;,el.style.msUserSelect=&#x22;text&#x22;,el.style.userSelect=&#x22;text&#x22;});" title="To install, drag and drop this link to your bookmarks">user-select-text.js</a>
+```
+javascript: (() => {
+  document.querySelectorAll("*").forEach((el) => {
+    el.style.webkitUserSelect = "text";
+    el.style.MozUserSelect = "text";
+    el.style.msUserSelect = "text";
+    el.style.userSelect = "text";
+  });
+})();
+```
+
+
+### Unblur all
+
+Unblurs all element on the page.
+
+<a class='btn' href="javascript:void document.querySelectorAll(&#x22;*&#x22;).foreach(el=&#x3E;{el.style.filter=&#x22;blur(0) !important;&#x22;,el.style.webkitFilter=&#x22;blur(0) !important;&#x22;,el.style.backdropFilter=&#x22;blur(0) !important;&#x22;,el.style.webkitBackdropFilter=&#x22;blur(0) !important;&#x22;});" title="To install, drag and drop this link to your bookmarks">unblur-all.js</a>
+```
+javascript: (() => {
+  document.querySelectorAll("*").foreach((el) => {
+    el.style.filter = "blur(0) !important;";
+    el.style.webkitFilter = "blur(0) !important;";
+    el.style.backdropFilter = "blur(0) !important;";
+    el.style.webkitBackdropFilter = "blur(0) !important;";
+  });
+})();
+```
+
+
+### Remove CSS, image, and other media from a webpage
+
+Ever want to remove all the CSS and images/videos/etc on a webpage? Well now you can with this amazing new bookmarklet! Removes img/svg/iframe/audio/video/canvas.
+
+Why would you ever want to do that? Well, you can browse flashy websites without attracting the attention of others walking by (my current use case), and you can use it to see a before/after comparison of the website/webapp with and without CSS applied.
+
+<a class='btn' href="javascript:document.querySelectorAll(&#x22;img&#x22;).forEach(el=&#x3E;{el.replaceWith(&#x22;img_alt: &#x22;+el.alt)}),document.querySelectorAll(&#x22;svg&#x22;).forEach(el=&#x3E;{el.replaceWith(&#x22;svg_title: &#x22;+(el.querySelector(&#x22;title&#x22;)?.textContent??&#x22;&#x22;))}),document.querySelectorAll(&#x22;iframe, audio, video&#x22;).forEach(el=&#x3E;el.replaceWith(el.tagName.toLowerCase()+&#x22;_src: &#x22;+el.src)),document.querySelectorAll(&#x22;canvas&#x22;).forEach(el=&#x3E;el.replaceWith(&#x60;canvas_WxH: ${el.width}x&#x60;+el.height)),document.querySelectorAll(&#x22;[style]&#x22;).forEach(el=&#x3E;el.removeAttribute(&#x22;style&#x22;)),void document.querySelectorAll(&#x27;style, link[rel=&#x22;stylesheet&#x22;]&#x27;).forEach(el=&#x3E;el.remove());" title="To install, drag and drop this link to your bookmarks">remove-css-media.js</a>
+```
+javascript: (() => {
+  document.querySelectorAll('img').forEach((el) => {
+    el.replaceWith(`img_alt: ${el.alt}`);
+  });
+  document.querySelectorAll('svg').forEach((el) => {
+    el.replaceWith(
+      `svg_title: ${el.querySelector('title')?.textContent ?? ''}`
+    );
+  });
+  document
+    .querySelectorAll('iframe, audio, video')
+    .forEach((el) =>
+      el.replaceWith(`${el.tagName.toLowerCase()}_src: ${el.src}`)
+    );
+  document
+    .querySelectorAll('canvas')
+    .forEach((el) => el.replaceWith(`canvas_WxH: ${el.width}x${el.height}`));
+  document
+    .querySelectorAll('[style]')
+    .forEach((el) => el.removeAttribute('style'));
+  document
+    .querySelectorAll('style, link[rel="stylesheet"]')
+    .forEach((el) => el.remove());
+})();
+```
+
+
+## Check archived version of website
+
+### Using archive.org
+
+```js
+javascript:location.href='https://web.archive.org/web/*/%27+document.location.href;
+```
+
+### Using archive.is
+
+```js
+javascript:location.href='https://archive.is/%27+document.location.href;
+```
+
+## Shortcut for removepaywall.com
+
+Shortcut for [removepaywall.com](https://www.removepaywall.com/), has five options to remove paywall. Also has the option to view with archive.is.
+
+```js
+javascript:location.href='https://www.removepaywall.com/search?url=%27+document.location.href;
+```
+
+## Calculator-like app on the browser (not a bookmarklet)
+
+It would be awesome to create a calculator bookmarklet, but honestly, it's probably easier to open the developer tools and use the console to calculate anything. But, I found two apps that works great as calculators in the browser.
+
+### Unsure calculator
+
+The [unsure](https://filiph.github.io/unsure/) calculator calculates with uncertainty. There's also the [unsure app](https://filiph.github.io/napkin/) which lets you do back of the napkin calculations with uncertainty. Created by [Filip Hráček](https://filiph.net/)
+
+### Notepad calculator
+
+A cool [notepad calculator](https://notepadcalculator.com/) for quick calculations. Created by [Steve Ridout](https://steveridout.com/)
+
 ## Create a simple notepad on the browser
 
 Using html contenteditable to create an empty notepad to jot things down. To save your data, press Ctrl + S or save like a regular webpage, not the ideal but it works. Technically not a bookmarklet but a [data URL](https://developer.mozilla.org/en-US/docs/web/http/basics_of_http/data_urls) instead.
 
-Alternatively, you could use something like https://browserpad.org/ which saves your data to localStorage instead.
+Alternatively, you could use something like [browserpad](https://browserpad.org/) which saves your data to localStorage instead.
 
-#### Plain text only
+### Plain text only
 
+```html
+data:text/html,
+<html contenteditable="plaintext-only"></html>
 ```
-data:text/html, <html contenteditable='plaintext-only'>
-```
 
-#### Able to accept html formatting (when copy/paste from other websites)
+### Able to accept html formatting (when copy/paste from other websites)
 
-```
-data:text/html, <html contenteditable>
+```html
+data:text/html,
+<html contenteditable></html>
 ```
 
 ## Bookmarklets by others that I found useful
 
-#### Kill Sticky
+### Kill Sticky
 
-As the name implies, it's a bookmarklet that kills sticky content.
-
-https://github.com/t-mart/kill-sticky
+As the name implies, [kill sticky](https://github.com/t-mart/kill-sticky) it's a bookmarklet that kills sticky content.
 
 Here's a modified version I use that doesn't remove position fixed/sticky but makes them static instead.
 
@@ -732,25 +802,21 @@ javascript: (() => {
 ```
 
 
-#### Kick ass app
+### Kick ass app
 
-Cool bookmarklet that lets you 'destroy' websites.
+Cool [kick ass app](https://kickassapp.com/) bookmarklet that lets you 'destroy' websites.
 
-https://kickassapp.com/
+### Web development bookmarklets from CSS-tricks
 
-#### Web development bookmarklets from CSS-tricks
-
-Some useful bookmarklets for web development, more available in the comments section.
-
-https://css-tricks.com/web-development-bookmarklets/
+Some useful bookmarklets from [css-tricks.com](https://css-tricks.com/web-development-bookmarklets/) for web development, more available in the comments section.
 
 ## Some resources on making bookmarklets
 
-https://www.freecodecamp.org/news/what-are-bookmarklets/
+[freecodecamp.org](https://www.freecodecamp.org/news/what-are-bookmarklets/)
 
-https://gist.github.com/caseywatts/c0cec1f89ccdb8b469b1
+[caseywatts/bookmarkleting.md](https://gist.github.com/caseywatts/c0cec1f89ccdb8b469b1)
 
-https://make-bookmarklets.com/
+[make-bookmarklets.com](https://make-bookmarklets.com/)
 
 ## How to contribute
 
